@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {
   View,
-  Text,
   Dimensions,
-  StyleSheet,
-  ImageBackground,
   StatusBar,
-  ActivityIndicator,
-  TouchableOpacity,
+  StyleSheet,
   Alert,
   PermissionsAndroid,
 } from 'react-native';
@@ -17,7 +13,7 @@ import {useHeaderHeight} from '@react-navigation/elements';
 import ImageModal from 'react-native-image-modal';
 import RNFetchBlob from 'rn-fetch-blob';
 
-import Icon from 'react-native-vector-icons/AntDesign';
+import {AnimatedFAB, Snackbar} from 'react-native-paper';
 
 const Dev_Height = Dimensions.get('screen').height;
 const Dev_Width = Dimensions.get('screen').width;
@@ -27,9 +23,15 @@ function getExtention(filename) {
 }
 
 export default function Display({navigation, route}) {
-  const [item, setId] = useState(route.params.item);
   const [uri, setUri] = useState(route.params.uri);
+  const [isExtended, setIsExtended] = useState(true);
   const headerHeight = useHeaderHeight();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsExtended(false);
+    }, 2000);
+  }, []);
 
   async function RequestStoragePermission() {
     try {
@@ -113,51 +115,25 @@ export default function Display({navigation, route}) {
           uri: uri,
         }}
       />
-      {/* <ImageBackground
-        source={{uri: uri}}
-        style={{height: '100%', width: '100%'}}
-        onLoadStart={() => setActivityIndicator(true)}
-        onLoadEnd={() => setActivityIndicator(false)}>
-        <ActivityIndicator
-          color="#FFF"
-          size="large"
-          style={{
-            position: 'absolute',
-            top: Dev_Height - 0.5 * Dev_Height,
-            right: Dev_Width - 0.55 * Dev_Width,
-          }}
-          animating={activityIndicator}
-        />
-        <View style={styles.close_button_style}>
-          <TouchableOpacity
-            style={styles.Close_Button_Touchable}
-            onPress={() => navigation.goBack()}>
-            <Icon name="left" size={18} color="#FFF" />
-          </TouchableOpacity>
-        </View>
 
-        <View
-          style={{
-            height: '70%',
-            width: '100%',
-            justifyContent: 'flex-end',
-            backgroundColor: 'transparent',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            onPress={handleDownload}
-            style={{
-              height: '8%',
-              width: '40%',
-              borderRadius: 15,
-              backgroundColor: 'rgba(225,225,225,0.9)',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{color: '#121212', fontSize: 16}}>Download</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground> */}
+      <AnimatedFAB
+        icon={'download'}
+        label={'Download'}
+        extended={isExtended}
+        onPress={handleDownload}
+        visible={true}
+        animateFrom={'right'}
+        style={[styles.fabStyle, {bottom: headerHeight}]}
+        color={'#fff'}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  fabStyle: {
+    right: 12,
+    position: 'absolute',
+    backgroundColor: '#f74452',
+  },
+});
