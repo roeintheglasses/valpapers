@@ -94,7 +94,7 @@ export default HomeScreen = ({navigation}) => {
           alignItems: 'center',
         }}
         onPress={() =>
-          navigation.navigate('Display', {item: item, uri: item.largeArt})
+          navigation.navigate('Wallpaper', {item: item, uri: item.largeArt})
         }>
         <ImageBackground
           source={{uri: item.largeArt}}
@@ -187,7 +187,9 @@ export default HomeScreen = ({navigation}) => {
               width: '93%',
             }}
             data={playerCards}
-            keyExtractor={({_id}, index) => _id}
+            keyExtractor={(item, index) => {
+              return item.uuid + index.toString();
+            }}
             renderItem={renderPlayerCards}
             horizontal={true}
             showsHorizontalScrollIndicator={false}

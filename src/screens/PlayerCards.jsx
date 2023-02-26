@@ -48,8 +48,9 @@ export default function PlayerCards({route, navigation}) {
                   alignItems: 'center',
                 }}
                 onPress={() =>
-                  navigation.navigate('ImageDisplay', {
-                    id: item['id'],
+                  navigation.navigate('Wallpaper', {
+                    item: item,
+                    uri: item.largeArt,
                   })
                 }>
                 <Image

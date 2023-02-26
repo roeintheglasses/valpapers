@@ -12,6 +12,8 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 
+import {useHeaderHeight} from '@react-navigation/elements';
+
 import ImageModal from 'react-native-image-modal';
 import RNFetchBlob from 'rn-fetch-blob';
 
@@ -20,12 +22,14 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const Dev_Height = Dimensions.get('screen').height;
 const Dev_Width = Dimensions.get('screen').width;
 
+function getExtention(filename) {
+  return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
+}
+
 export default function Display({navigation, route}) {
   const [item, setId] = useState(route.params.item);
   const [uri, setUri] = useState(route.params.uri);
-  const [imageWidth, setImageWidth] = useState(0);
-
-  const [activityIndicator, setActivityIndicator] = useState(true);
+  const headerHeight = useHeaderHeight();
 
   async function RequestStoragePermission() {
     try {
@@ -57,8 +61,7 @@ export default function Display({navigation, route}) {
     }
   }
 
-  const downloadImage = () => {
-    RequestStoragePermission();
+  function downloadImage() {
     var date = new Date();
     let imageUri = uri;
     var ext = getExtention(imageUri);
@@ -72,7 +75,7 @@ export default function Display({navigation, route}) {
         notification: true,
         path:
           PictureDir +
-          '/image_' +
+          '/valpapers_' +
           Math.floor(date.getTime() + date.getSeconds() / 2) +
           ext,
         description: 'Image',
@@ -83,31 +86,34 @@ export default function Display({navigation, route}) {
       .then(res => {
         Alert.alert('Download Success !');
       });
-  };
+  }
 
-  const getExtention = filename => {
-    return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
-  };
+  async function handleDownload() {
+    await RequestStoragePermission();
+    downloadImage();
+  }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        height: Dev_Height - headerHeight,
+        width: Dev_Width,
+        backgroundColor: '#111111',
+      }}>
       <StatusBar translucent backgroundColor="transparent" />
-
-      {/* <ImageModal
-        isTranslucent={false}
-        swipeToDismiss={false}
+      <ImageModal
         resizeMode="contain"
-        imageBackgroundColor="#000000"
+        imageBackgroundColor="#111111"
         style={{
-          width: imageWidth,
-          height: 250,
+          width: Dev_Width,
+          height: '100%',
+          backgroundColor: '#111111',
         }}
         source={{
           uri: uri,
         }}
-      /> */}
-
-      <ImageBackground
+      />
+      {/* <ImageBackground
         source={{uri: uri}}
         style={{height: '100%', width: '100%'}}
         onLoadStart={() => setActivityIndicator(true)}
@@ -139,7 +145,7 @@ export default function Display({navigation, route}) {
             alignItems: 'center',
           }}>
           <TouchableOpacity
-            onPress={downloadImage}
+            onPress={handleDownload}
             style={{
               height: '8%',
               width: '40%',
@@ -151,32 +157,7 @@ export default function Display({navigation, route}) {
             <Text style={{color: '#121212', fontSize: 16}}>Download</Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </ImageBackground> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: Dev_Height,
-    width: Dev_Width,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#222222',
-  },
-  close_button_style: {
-    height: '20%',
-    width: '90%',
-    justifyContent: 'center',
-    paddingTop: StatusBar.currentHeight,
-  },
-  Close_Button_Touchable: {
-    height: 50,
-    width: 50,
-    backgroundColor: 'rgba(225,225,225,0.1)',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: '10%',
-  },
-});

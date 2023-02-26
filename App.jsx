@@ -65,6 +65,7 @@ function AppContainer() {
                 backgroundColor: '#111111',
               },
               headerShadowVisible: false,
+              headerTintColor: '#fff',
             }}
           />
         </Stack.Navigator>
@@ -79,7 +80,7 @@ export default function App() {
   React.useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 3000);
+    }, 2500);
   }, []);
 
   return (
