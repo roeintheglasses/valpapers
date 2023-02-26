@@ -10,6 +10,7 @@ import {LogBox} from 'react-native';
 
 import HomeScreen from './src/screens/HomeScreen';
 import Display from './src/screens/Display';
+import PlayerCards from './src/screens/PlayerCards';
 
 import vGif from './assets/v_logo.gif';
 
@@ -41,10 +42,29 @@ function AppContainer() {
           />
 
           <Stack.Screen
-            name="Display"
+            name="Wallpaper"
             component={Display}
             options={{
-              headerShown: false,
+              headerShown: true,
+              title: 'Wallpaper',
+              headerStyle: {
+                backgroundColor: '#111111',
+              },
+              headerShadowVisible: false,
+              headerTintColor: '#fff',
+            }}
+          />
+
+          <Stack.Screen
+            name="PlayerCards"
+            component={PlayerCards}
+            options={{
+              headerShown: true,
+              title: 'Player Cards',
+              headerStyle: {
+                backgroundColor: '#111111',
+              },
+              headerShadowVisible: false,
             }}
           />
         </Stack.Navigator>

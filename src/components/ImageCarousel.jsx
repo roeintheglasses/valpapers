@@ -20,7 +20,7 @@ function ImageCarousel({navigation, data}) {
           alignItems: 'center',
         }}
         onPress={() =>
-          navigation.navigate('Display', {
+          navigation.navigate('Wallpaper', {
             item: item,
             uri: item.uri,
           })
@@ -41,7 +41,9 @@ function ImageCarousel({navigation, data}) {
       itemWidth={Item_Width}
       renderItem={_renderItem}
       bounces={true}
-      keyExtractor={(item, index) => item.id}
+      keyExtractor={(item, index) => {
+        return item.id + index.toString();
+      }}
       activeSlideAlignment={'center'}
       autoplay={true}
       loop={true}

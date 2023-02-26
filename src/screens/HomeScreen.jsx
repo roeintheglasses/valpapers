@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
-  Image,
   FlatList,
   StatusBar,
   TouchableOpacity,
@@ -17,7 +16,6 @@ const Dev_Width = Dimensions.get('screen').width;
 const Item_Width = Dev_Width - 0.6 * Dev_Width;
 
 import useWallpapers from '../services/valorantApi/wallpapers';
-import HomeScreenCarousel from '../components/HomeScreenCarousel';
 import ImageCarousel from '../components/ImageCarousel';
 
 import {MAIN_WALLPAPERS, VAL_LOGO} from '../wallpaperList.json';
@@ -27,7 +25,11 @@ LogBox.ignoreLogs(['Warning: ...']);
 
 export default HomeScreen = ({navigation}) => {
   const [topWallpapers, setTopWallpapers] = useState([]);
+  const [playerCards, setPlayerCards] = useState([]);
+
+  //TODO: Handle status, loadind & error
   const {data, isLoading, isError, isSuccess} = useWallpapers();
+
   const x = useRef(new Animated.Value(-100)).current;
 
   const slide = () => {
@@ -51,12 +53,41 @@ export default HomeScreen = ({navigation}) => {
     setupTopWallpapers();
   }, []);
 
-  const _renderItemCatogories = ({item, index}) => {
+  useEffect(() => {
+    if (isSuccess && Array.isArray(data)) {
+      let selectedCards = data.sort(() => 0.5 - Math.random()).slice(0, 8);
+      setPlayerCards(selectedCards);
+    }
+  }, [data]);
+
+  const renderPlayerCards = ({item, index}) => {
+    if (index === 7) {
+      return (
+        <TouchableOpacity
+          style={{
+            height: '90%',
+            width: Dev_Width - 0.7 * Dev_Width,
+            backgroundColor: 'transparent',
+            borderRadius: 15,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => {
+            navigation.navigate('PlayerCards');
+          }}>
+          <View style={styles.showMoreCard}>
+            <Text style={styles.showMoreCardText}>Show</Text>
+            <Text style={styles.showMoreCardText}>More</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+
     return (
       <TouchableOpacity
         style={{
           height: '90%',
-          width: Dev_Width - 0.6 * Dev_Width,
+          width: Dev_Width - 0.7 * Dev_Width,
           backgroundColor: 'transparent',
           borderRadius: 15,
           justifyContent: 'center',
@@ -71,9 +102,13 @@ export default HomeScreen = ({navigation}) => {
             height: '100%',
             width: '100%',
             borderRadius: 15,
-            justifyContent: 'flex-end',
+            flex: 1,
+            justifyDirection: 'flex-end',
           }}
-          imageStyle={{borderRadius: 15}}
+          imageStyle={{
+            borderRadius: 15,
+            top: 0,
+          }}
         />
       </TouchableOpacity>
     );
@@ -82,7 +117,7 @@ export default HomeScreen = ({navigation}) => {
   const renderSeparator = () => (
     <View
       style={{
-        width: 20,
+        width: 15,
       }}
     />
   );
@@ -135,7 +170,7 @@ export default HomeScreen = ({navigation}) => {
               fontWeight: 'bold',
               marginLeft: '5%',
             }}>
-            Valpapers
+            Player Cards
           </Text>
         </View>
 
@@ -151,14 +186,19 @@ export default HomeScreen = ({navigation}) => {
               height: '100%',
               width: '93%',
             }}
-            data={data}
+            data={playerCards}
             keyExtractor={({_id}, index) => _id}
-            renderItem={_renderItemCatogories}
+            renderItem={renderPlayerCards}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={renderSeparator}
             alwaysBounceHorizontal={true}
             bounces={true}
+            removeClippedSubviews={true} // Unmount components when outside of window
+            initialNumToRender={2} // Reduce initial render amount
+            maxToRenderPerBatch={1} // Reduce number in each render batch
+            updateCellsBatchingPeriod={100} // Increase time between renders
+            windowSize={7} // Reduce the window size
           />
         </View>
       </View>
@@ -176,5 +216,22 @@ const styles = StyleSheet.create({
     height: '25%',
     width: '100%',
     justifyContent: 'center',
+  },
+  showMoreCard: {
+    height: '100%',
+    width: '100%',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#2f2f2f',
+    backgroundColor: '#2f2f2f',
+  },
+  showMoreCardText: {
+    fontSize: 26,
+    color: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontFamily: 'VALORANT',
   },
 });
