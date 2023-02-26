@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import 'react-native-gesture-handler';
+import AnimatedSplash from 'react-native-animated-splash-screen';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -10,6 +11,8 @@ import {LogBox} from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import Display from './src/screens/Display';
 
+import vGif from './assets/v_logo.gif';
+
 const queryClient = new QueryClient({
   defaultOptions: {queries: {retry: 2}},
 });
@@ -17,7 +20,7 @@ const queryClient = new QueryClient({
 const Stack = createStackNavigator();
 LogBox.ignoreLogs(['Warning: ...']);
 
-export default function App() {
+function AppContainer() {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
@@ -47,5 +50,27 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
+  );
+}
+
+export default function App() {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 3000);
+  }, []);
+
+  return (
+    <AnimatedSplash
+      translucent={false}
+      isLoaded={isLoaded}
+      logoImage={vGif}
+      backgroundColor={'#000000'}
+      logoHeight={250}
+      logoWidth={250}>
+      <AppContainer />
+    </AnimatedSplash>
   );
 }
