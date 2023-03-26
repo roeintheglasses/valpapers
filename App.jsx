@@ -5,8 +5,11 @@ import AnimatedSplash from 'react-native-animated-splash-screen';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {QueryClient} from '@tanstack/react-query';
 import {LogBox} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
+import {createAsyncStoragePersister} from '@tanstack/query-async-storage-persister';
 
 import HomeScreen from './src/screens/HomeScreen';
 import Display from './src/screens/Display';
@@ -15,15 +18,20 @@ import PlayerCards from './src/screens/PlayerCards';
 import vGif from './assets/v_logo.gif';
 
 const queryClient = new QueryClient({
-  defaultOptions: {queries: {retry: 2}},
+  defaultOptions: {queries: {retry: 2}, cacheTime: 1000 * 60 * 60 * 24},
+});
+
+const asyncStoragePersister = createAsyncStoragePersister({
+  storage: AsyncStorage,
 });
 
 const Stack = createStackNavigator();
-LogBox.ignoreLogs(['Warning: ...']);
 
 function AppContainer() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{persister: asyncStoragePersister}}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName={'Home'}
@@ -70,7 +78,7 @@ function AppContainer() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </QueryClientProvider>
+    </PersistQueryClientProvider>
   );
 }
 
