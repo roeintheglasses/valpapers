@@ -10,18 +10,30 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
+import useWallpapers from '../services/valorantApi/wallpapers';
+import ImageCarousel from '../components/ImageCarousel';
+import {MAIN_WALLPAPERS, VAL_LOGO} from '../wallpaperList.json';
+import {LogBox} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
+LogBox.ignoreLogs(['Warning: ...']);
 
 const Dev_Height = Dimensions.get('screen').height;
 const Dev_Width = Dimensions.get('screen').width;
 const Item_Width = Dev_Width - 0.6 * Dev_Width;
 
-import useWallpapers from '../services/valorantApi/wallpapers';
-import ImageCarousel from '../components/ImageCarousel';
+const setupTopWallpapers = () => {
+  let topPapers = MAIN_WALLPAPERS.sort(() => 0.5 - Math.random()).slice(0, 10);
+  return topPapers;
+};
 
-import {MAIN_WALLPAPERS, VAL_LOGO} from '../wallpaperList.json';
-
-import {LogBox} from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']);
+const renderSeparator = () => (
+  <View
+    style={{
+      width: 15,
+    }}
+  />
+);
 
 export default HomeScreen = ({navigation}) => {
   const [topWallpapers, setTopWallpapers] = useState([]);
@@ -40,25 +52,19 @@ export default HomeScreen = ({navigation}) => {
     }).start();
   };
 
-  const setupTopWallpapers = () => {
-    let topPapers = MAIN_WALLPAPERS.sort(() => 0.5 - Math.random()).slice(
-      0,
-      10,
-    );
-    setTopWallpapers(topPapers);
-  };
-
   useEffect(() => {
+    setTopWallpapers(setupTopWallpapers);
     slide();
-    setupTopWallpapers();
   }, []);
 
   useEffect(() => {
     if (isSuccess && Array.isArray(data)) {
       let selectedCards = data.sort(() => 0.5 - Math.random()).slice(0, 8);
       setPlayerCards(selectedCards);
+    } else {
+      setPlayerCards([]);
     }
-  }, [data]);
+  }, [isSuccess, data]);
 
   const renderPlayerCards = ({item, index}) => {
     if (index === 7) {
@@ -113,14 +119,6 @@ export default HomeScreen = ({navigation}) => {
       </TouchableOpacity>
     );
   };
-
-  const renderSeparator = () => (
-    <View
-      style={{
-        width: 15,
-      }}
-    />
-  );
 
   return (
     <View style={styles.container}>
@@ -232,8 +230,6 @@ const styles = StyleSheet.create({
   showMoreCardText: {
     fontSize: 26,
     color: '#FFF',
-    justifyContent: 'center',
-    alignItems: 'center',
     fontFamily: 'VALORANT',
   },
 });
