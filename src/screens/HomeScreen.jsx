@@ -14,8 +14,8 @@ import useWallpapers from '../services/valorantApi/wallpapers';
 import ImageCarousel from '../components/ImageCarousel';
 import {MAIN_WALLPAPERS, VAL_LOGO} from '../wallpaperList.json';
 import {LogBox} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
+import {CDN_URL, PATHS} from '../constants.json';
 LogBox.ignoreLogs(['Warning: ...']);
 
 const Dev_Height = Dimensions.get('screen').height;
@@ -99,9 +99,13 @@ export default HomeScreen = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        onPress={() =>
-          navigation.navigate('Wallpaper', {item: item, uri: item.largeArt})
-        }>
+        onPress={() => {
+          let itemUpscaledUri = `${CDN_URL}${PATHS.playerCards}/${item.uuid}.png`;
+          navigation.navigate('Wallpaper', {
+            item: item,
+            uri: itemUpscaledUri,
+          });
+        }}>
         <ImageBackground
           source={{uri: item.largeArt}}
           style={{
@@ -160,7 +164,12 @@ export default HomeScreen = ({navigation}) => {
           <ImageCarousel navigation={navigation} data={topWallpapers} />
         </View>
 
-        <View style={{height: '10%', justifyContent: 'center', width: '100%'}}>
+        <View
+          style={{
+            height: '10%',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}>
           <Text
             style={{
               fontSize: 18,
@@ -169,6 +178,15 @@ export default HomeScreen = ({navigation}) => {
               marginLeft: '5%',
             }}>
             Player Cards
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              color: '#FFF',
+              fontWeight: 'bold',
+              marginLeft: '5%',
+            }}>
+            Show More
           </Text>
         </View>
 

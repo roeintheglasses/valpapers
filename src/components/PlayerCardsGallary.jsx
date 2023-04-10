@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Image, TouchableOpacity, Dimensions} from 'react-native';
-import {log} from 'react-native-reanimated';
+import {CDN_URL, PATHS} from '../constants.json';
 
 const Dev_Height = Dimensions.get('screen').height;
 const Dev_Width = Dimensions.get('screen').width;
@@ -15,8 +15,7 @@ function PlayerCardsGallary({cardData}) {
         borderRadius: 15,
       }}
       onPress={() => {
-        let itemUpscaledUri = `https://d8uzpuspsyebn.cloudfront.net/playerCards/${item.uuid}.png`;
-        console.log(itemUpscaledUri);
+        let itemUpscaledUri = `${CDN_URL}${PATHS.playerCards}/${item.uuid}.png`;
         navigation.navigate('Wallpaper', {
           item: item,
           uri: itemUpscaledUri,

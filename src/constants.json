@@ -1,0 +1,6 @@
+{
+  "CDN_URL": "https://cdn.valpapers.tech",
+  "PATHS": {
+    "playerCards": "/playerCards"
+  }
+}
