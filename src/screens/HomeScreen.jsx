@@ -167,7 +167,9 @@ export default HomeScreen = ({navigation}) => {
         <View
           style={{
             height: '10%',
+            flexDirection: 'row',
             justifyContent: 'space-between',
+            alignItems: 'center',
             width: '100%',
           }}>
           <Text
@@ -179,15 +181,17 @@ export default HomeScreen = ({navigation}) => {
             }}>
             Player Cards
           </Text>
-          <Text
-            style={{
-              fontSize: 18,
-              color: '#FFF',
-              fontWeight: 'bold',
-              marginLeft: '5%',
-            }}>
-            Show More
-          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('PlayerCards')}>
+            <Text
+              style={{
+                fontSize: 18,
+                color: '#FFF',
+                fontWeight: 'bold',
+                marginLeft: '5%',
+              }}>
+              Show More
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <View

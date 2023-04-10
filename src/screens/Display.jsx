@@ -24,14 +24,7 @@ function getExtention(filename) {
 
 export default function Display({navigation, route}) {
   const [uri, setUri] = useState(route.params.uri);
-  const [isExtended, setIsExtended] = useState(true);
   const headerHeight = useHeaderHeight();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsExtended(false);
-    }, 2000);
-  }, []);
 
   async function RequestStoragePermission() {
     try {
@@ -119,11 +112,11 @@ export default function Display({navigation, route}) {
       <AnimatedFAB
         icon={'download'}
         label={'Download'}
-        extended={isExtended}
+        extended={true}
         onPress={handleDownload}
         visible={true}
         animateFrom={'right'}
-        style={[styles.fabStyle, {bottom: headerHeight}]}
+        style={[styles.fabStyle, {bottom: headerHeight - 10}]}
         color={'#fff'}
       />
     </View>
@@ -132,7 +125,7 @@ export default function Display({navigation, route}) {
 
 const styles = StyleSheet.create({
   fabStyle: {
-    right: 12,
+    left: '34%',
     position: 'absolute',
     backgroundColor: '#f74452',
   },
