@@ -44,7 +44,6 @@ const convertTo12CardArray = data => {
     return acc;
   }, []);
 
-  console.log(selectedCards);
   return selectedCards;
 };
 

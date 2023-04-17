@@ -1799,6 +1799,11 @@
     "@tanstack/query-core" "4.24.9"
     use-sync-external-store "^1.2.0"
 
+"@tierrybr/react-native-manage-wallpaper@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@tierrybr/react-native-manage-wallpaper/-/react-native-manage-wallpaper-1.1.3.tgz#727d4bff0c639332f5d1035e3ef1b4a36006fa54"
+  integrity sha512-d0OrQdgNTcwUVvc9MhJt833Mk2Wv7QmACTPjwInl+hASQ5OtuIMSSiN1HQ1V6eXqEKP6F8aD9kaf2ucOxO7axQ==
+
 "@tsconfig/react-native@^2.0.2":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@tsconfig/react-native/-/react-native-2.0.3.tgz#79ad8efc6d3729152da6cb23725b6c364a7349b2"

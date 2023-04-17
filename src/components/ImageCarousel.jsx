@@ -46,7 +46,9 @@ function ImageCarousel({navigation, data}) {
       }}
       activeSlideAlignment={'center'}
       autoplay={true}
+      lockScrollWhileSnapping={true}
       loop={true}
+      enableMomentum={true}
     />
   );
 }

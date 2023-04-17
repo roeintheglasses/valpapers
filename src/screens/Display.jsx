@@ -6,14 +6,17 @@ import {
   StyleSheet,
   Alert,
   PermissionsAndroid,
+  NativeModules,
 } from 'react-native';
+
+import ManageWallpaper, {TYPE} from '@tierrybr/react-native-manage-wallpaper';
 
 import {useHeaderHeight} from '@react-navigation/elements';
 
 import ImageModal from 'react-native-image-modal';
 import RNFetchBlob from 'rn-fetch-blob';
 
-import {AnimatedFAB, Snackbar} from 'react-native-paper';
+import {Button, Snackbar} from 'react-native-paper';
 
 const Dev_Height = Dimensions.get('screen').height;
 const Dev_Width = Dimensions.get('screen').width;
@@ -25,67 +28,90 @@ function getExtention(filename) {
 export default function Display({navigation, route}) {
   const [uri, setUri] = useState(route.params.uri);
   const headerHeight = useHeaderHeight();
+  const [visible, setVisible] = React.useState(false);
+
+  const showDownloadSnackbar = () => setVisible(true);
+  const onDismissSnackBar = () => setVisible(false);
 
   async function RequestStoragePermission() {
-    try {
-      if (Platform.OS !== 'android') return;
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (Platform.OS !== 'android') return;
 
-      const result = await PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      );
-
-      if (result !== PermissionsAndroid.RESULTS.granted) {
-        const granted = await PermissionsAndroid.request(
+        const result = await PermissionsAndroid.check(
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          {
-            title: 'Valpapers Storage Permission',
-            message:
-              'Valpapers needs storage access' +
-              'so you can download wallpapers.',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
         );
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          Alert.alert('Storage permission denied, cannot download!');
+
+        if (result !== PermissionsAndroid.RESULTS.granted) {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            {
+              title: 'Valpapers Storage Permission',
+              message:
+                'Valpapers needs storage access' +
+                'so you can download wallpapers.',
+              buttonNeutral: 'Ask Me Later',
+              buttonNegative: 'Cancel',
+              buttonPositive: 'OK',
+            },
+          );
+          if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+            Alert.alert('Storage permission denied, cannot download!');
+            reject(false);
+          }
         }
+        resolve(true);
+      } catch (err) {
+        console.warn(err);
+        reject(false);
       }
-    } catch (err) {
-      console.warn(err);
-    }
+    });
   }
 
   function downloadImage() {
-    var date = new Date();
-    let imageUri = uri;
-    var ext = getExtention(imageUri);
-    ext = '.' + ext[0];
-    const {config, fs} = RNFetchBlob;
-    let PictureDir = fs.dirs.PictureDir;
-    let options = {
-      fileCache: true,
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        notification: true,
-        path:
-          PictureDir +
-          '/valpapers_' +
-          Math.floor(date.getTime() + date.getSeconds() / 2) +
-          ext,
-        description: 'Image',
-      },
-    };
-    config(options)
-      .fetch('GET', imageUri)
-      .then(res => {
-        Alert.alert('Download Success !');
-      });
+    try {
+      let date = new Date();
+      let imageUri = uri;
+      var ext = getExtention(imageUri);
+      ext = '.' + ext[0];
+      const {config, fs} = RNFetchBlob;
+      let PictureDir = fs.dirs.PictureDir;
+      let options = {
+        fileCache: true,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          notification: true,
+          path:
+            PictureDir +
+            '/valpapers_' +
+            Math.floor(date.getTime() + date.getSeconds() / 2) +
+            ext,
+          description: 'Image',
+        },
+      };
+      config(options).fetch('GET', imageUri);
+      showDownloadSnackbar();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleDownload() {
-    await RequestStoragePermission();
+    let storagPermission = await RequestStoragePermission();
+    if (!storagPermission) {
+      return;
+    }
     downloadImage();
+  }
+
+  function handleSetWallpaper() {
+    ManageWallpaper.setWallpaper(
+      {
+        uri: uri,
+      },
+      res => console.log(res),
+      TYPE.HOME,
+    );
   }
 
   return (
@@ -96,37 +122,64 @@ export default function Display({navigation, route}) {
         backgroundColor: '#111111',
       }}>
       <StatusBar translucent backgroundColor="transparent" />
-      <ImageModal
-        resizeMode="contain"
-        imageBackgroundColor="#111111"
+      <View
         style={{
+          height: '85%',
           width: Dev_Width,
-          height: '100%',
           backgroundColor: '#111111',
-        }}
-        source={{
-          uri: uri,
-        }}
-      />
+        }}>
+        <ImageModal
+          resizeMode="contain"
+          swipeToDismiss={true}
+          imageBackgroundColor="#111111"
+          style={{
+            width: Dev_Width,
+            height: '100%',
+            backgroundColor: '#111111',
+          }}
+          source={{
+            uri: uri,
+          }}
+        />
+      </View>
+      <View style={[styles.fabStyle, {bottom: headerHeight - 25}]}>
+        <Button
+          mode="contained"
+          onPress={handleSetWallpaper}
+          style={{backgroundColor: '#f74755'}}>
+          Set Wallpaper
+        </Button>
+        <Button
+          mode="contained"
+          onPress={handleDownload}
+          style={{backgroundColor: '#f74755'}}>
+          Download
+        </Button>
+      </View>
 
-      <AnimatedFAB
-        icon={'download'}
-        label={'Download'}
-        extended={true}
-        onPress={handleDownload}
-        visible={true}
-        animateFrom={'right'}
-        style={[styles.fabStyle, {bottom: headerHeight - 10}]}
-        color={'#fff'}
-      />
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        wrapperStyle={{top: 0, position: 'absolute'}}
+        duration={5000}
+        action={{
+          label: 'close',
+          onPress: onDismissSnackBar,
+        }}>
+        Wallpaper Downloaded!
+      </Snackbar>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   fabStyle: {
-    left: '34%',
     position: 'absolute',
-    backgroundColor: '#f74452',
+    width: Dev_Width,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: Dev_Width / 10,
   },
 });
