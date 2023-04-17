@@ -101,7 +101,7 @@ export default function PlayerCards({route, navigation}) {
       <View style={styles.footer}>
         {currentTwoDIndex > 0 && (
           <Button
-            labelStyle={{fontSize: 18}}
+            labelStyle={{fontSize: 16}}
             buttonColor="#ff5d5e"
             textColor="white"
             mode="contained-tonal"
@@ -112,7 +112,7 @@ export default function PlayerCards({route, navigation}) {
 
         {currentTwoDIndex < twoDCards.length && (
           <Button
-            labelStyle={{fontSize: 18}}
+            labelStyle={{fontSize: 16}}
             buttonColor="#ff5d5e"
             textColor="white"
             mode="contained-tonal"
