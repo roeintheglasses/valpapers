@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, useRef} from 'react';
 import {
   View,
   SafeAreaView,
@@ -23,7 +23,8 @@ const Dev_Width = Dimensions.get('screen').width;
 const PLAYER_CARD_HEIGHT = Dev_Height - 0.7 * Dev_Height;
 
 const getItemLayout = (data, index) => ({
-  length: PLAYER_CARD_HEIGHT,
+  length: PLAYER_CARD_HEIGHT, // replace with the actual height of your item
+  offset: 15,
   index,
 });
 
@@ -48,6 +49,7 @@ const convertTo12CardArray = data => {
 };
 
 export default function PlayerCards({route, navigation}) {
+  const flatListRef = useRef();
   const {data, isLoading, isError, isSuccess} = useWallpapers();
   const [playerCards, setPlayerCards] = useState([]);
   const [currentTwoDIndex, setCurrentTwoDIndex] = useState(0);
@@ -74,11 +76,14 @@ export default function PlayerCards({route, navigation}) {
     );
   }
 
+  const moveToTop = () => flatListRef.current.scrollToOffset({offset: 0});
+
   const handleOnNext = () => {
     let nextIndex = currentTwoDIndex + 1;
     if (nextIndex < twoDCards.length) {
       setCurrentTwoDIndex(nextIndex);
       setPlayerCards(twoDCards[nextIndex]);
+      moveToTop();
     }
   };
 
@@ -87,71 +92,69 @@ export default function PlayerCards({route, navigation}) {
     if (prevIndex >= 0) {
       setCurrentTwoDIndex(prevIndex);
       setPlayerCards(twoDCards[prevIndex]);
+      moveToTop();
     }
+  };
+
+  const getListFooter = () => {
+    return (
+      <View style={styles.footer}>
+        {currentTwoDIndex > 0 && (
+          <Button
+            style={{
+              borderRadius: 10,
+              paddingVertical: 4,
+              paddingHorizontal: 8,
+            }}
+            labelStyle={{fontSize: 18}}
+            buttonColor="#ff5d5e"
+            textColor="white"
+            mode="contained-tonal"
+            onPress={handleOnBack}>
+            Back
+          </Button>
+        )}
+
+        {currentTwoDIndex < twoDCards.length && (
+          <Button
+            style={{
+              borderRadius: 10,
+              paddingVertical: 4,
+              paddingHorizontal: 8,
+            }}
+            labelStyle={{fontSize: 18}}
+            buttonColor="#ff5d5e"
+            textColor="white"
+            mode="contained-tonal"
+            onPress={handleOnNext}>
+            Next
+          </Button>
+        )}
+      </View>
+    );
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.FlatList_Container}>
         <FlatList
+          ref={flatListRef}
           contentContainerStyle={{paddingBottom: 10}}
           columnWrapperStyle={{justifyContent: 'space-between'}}
           numColumns={3}
           scrollEnabled={true}
-          removeClippedSubviews={true}
           data={playerCards}
           renderItem={cardData => <PlayerCardsGallary cardData={cardData} />}
           keyExtractor={(item, index) => {
-            return item.uuid;
+            return item.uuid + index.toString();
           }}
           ItemSeparatorComponent={() => {
             return <View style={{height: 15}} />;
           }}
-          initialNumToRender={6}
-          windowSize={2} // adjust the value to find the optimal setting for your use case
-          getItemLayout={(data, index) => ({
-            length: PLAYER_CARD_HEIGHT, // replace with the actual height of your item
-            offset: 15,
-            index,
-          })}
+          initialNumToRender={9}
+          getItemLayout={getItemLayout}
           scrollsToTop={true}
-          ListFooterComponent={() => {
-            return (
-              <View style={styles.footer}>
-                {currentTwoDIndex > 0 && (
-                  <Button
-                    style={{
-                      borderRadius: 10,
-                      paddingVertical: 4,
-                      paddingHorizontal: 8,
-                    }}
-                    labelStyle={{fontSize: 18}}
-                    buttonColor="#ff5d5e"
-                    textColor="white"
-                    mode="contained-tonal"
-                    onPress={handleOnBack}>
-                    Back
-                  </Button>
-                )}
-
-                {currentTwoDIndex < twoDCards.length && (
-                  <Button
-                    style={{
-                      borderRadius: 10,
-                      paddingVertical: 4,
-                      paddingHorizontal: 8,
-                    }}
-                    labelStyle={{fontSize: 18}}
-                    buttonColor="#ff5d5e"
-                    textColor="white"
-                    mode="contained-tonal"
-                    onPress={handleOnNext}>
-                    Next
-                  </Button>
-                )}
-              </View>
-            );
-          }}
+          ListFooterComponent={getListFooter}
         />
       </View>
     </SafeAreaView>

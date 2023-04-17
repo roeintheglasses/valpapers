@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Alert,
   PermissionsAndroid,
-  NativeModules,
 } from 'react-native';
 
 import ManageWallpaper, {TYPE} from '@tierrybr/react-native-manage-wallpaper';
@@ -16,7 +15,14 @@ import {useHeaderHeight} from '@react-navigation/elements';
 import ImageModal from 'react-native-image-modal';
 import RNFetchBlob from 'rn-fetch-blob';
 
-import {Button, Snackbar} from 'react-native-paper';
+import {
+  Snackbar,
+  Button,
+  Dialog,
+  Portal,
+  Provider,
+  Text,
+} from 'react-native-paper';
 
 const Dev_Height = Dimensions.get('screen').height;
 const Dev_Width = Dimensions.get('screen').width;
@@ -28,7 +34,8 @@ function getExtention(filename) {
 export default function Display({navigation, route}) {
   const [uri, setUri] = useState(route.params.uri);
   const headerHeight = useHeaderHeight();
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const showDownloadSnackbar = () => setVisible(true);
   const onDismissSnackBar = () => setVisible(false);
@@ -104,71 +111,126 @@ export default function Display({navigation, route}) {
     downloadImage();
   }
 
-  function handleSetWallpaper() {
+  function showWallpaperDialog() {
+    setDialogVisible(true);
+  }
+
+  function hideDialog() {
+    setDialogVisible(false);
+  }
+
+  function setHomescreenWallpaper() {
+    handleSetWallpaper(uri, TYPE.HOME);
+    hideDialog();
+  }
+
+  function setLockscreenWallpaper() {
+    handleSetWallpaper(uri, TYPE.LOCK);
+    hideDialog();
+  }
+
+  function setHomescreenAndLockscreenWallpaper() {
+    handleSetWallpaper(uri, TYPE.BOTH);
+    hideDialog();
+  }
+
+  function handleSetWallpaper(uri, type) {
     ManageWallpaper.setWallpaper(
       {
         uri: uri,
       },
       res => console.log(res),
-      TYPE.HOME,
+      type,
+    );
+  }
+
+  function dialogBoxUI() {
+    return (
+      <Portal>
+        <Dialog
+          style={{alignItems: 'center'}}
+          visible={dialogVisible}
+          onDismiss={hideDialog}>
+          <Dialog.Title>Set Wallpaper</Dialog.Title>
+          <Dialog.Actions>
+            <Button onPress={setHomescreenWallpaper}>Homescreen</Button>
+          </Dialog.Actions>
+          <Dialog.Actions>
+            <Button onPress={setLockscreenWallpaper}>Lockscreen</Button>
+          </Dialog.Actions>
+          <Dialog.Actions>
+            <Button onPress={setHomescreenAndLockscreenWallpaper}>Both</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    );
+  }
+
+  function snackBarUI() {
+    return (
+      <Portal>
+        <Snackbar
+          visible={visible}
+          onDismiss={onDismissSnackBar}
+          wrapperStyle={{top: 0}}
+          duration={5000}
+          action={{
+            label: 'close',
+            onPress: onDismissSnackBar,
+          }}>
+          Wallpaper Downloaded!
+        </Snackbar>
+      </Portal>
     );
   }
 
   return (
-    <View
-      style={{
-        height: Dev_Height - headerHeight,
-        width: Dev_Width,
-        backgroundColor: '#111111',
-      }}>
-      <StatusBar translucent backgroundColor="transparent" />
+    <Provider>
       <View
         style={{
-          height: '85%',
+          height: Dev_Height - headerHeight,
           width: Dev_Width,
           backgroundColor: '#111111',
         }}>
-        <ImageModal
-          resizeMode="contain"
-          swipeToDismiss={true}
-          imageBackgroundColor="#111111"
+        <StatusBar translucent backgroundColor="transparent" />
+        <View
           style={{
+            height: '85%',
             width: Dev_Width,
-            height: '100%',
             backgroundColor: '#111111',
-          }}
-          source={{
-            uri: uri,
-          }}
-        />
+          }}>
+          <ImageModal
+            resizeMode="contain"
+            swipeToDismiss={true}
+            imageBackgroundColor="#111111"
+            style={{
+              width: Dev_Width,
+              height: '100%',
+              backgroundColor: '#111111',
+            }}
+            source={{
+              uri: uri,
+            }}
+          />
+        </View>
+        <View style={[styles.fabStyle, {bottom: headerHeight - 25}]}>
+          <Button
+            mode="contained"
+            onPress={showWallpaperDialog}
+            style={{backgroundColor: '#f74755'}}>
+            Set Wallpaper
+          </Button>
+          <Button
+            mode="contained"
+            onPress={handleDownload}
+            style={{backgroundColor: '#f74755'}}>
+            Download
+          </Button>
+        </View>
+        {dialogBoxUI()}
+        {snackBarUI()}
       </View>
-      <View style={[styles.fabStyle, {bottom: headerHeight - 25}]}>
-        <Button
-          mode="contained"
-          onPress={handleSetWallpaper}
-          style={{backgroundColor: '#f74755'}}>
-          Set Wallpaper
-        </Button>
-        <Button
-          mode="contained"
-          onPress={handleDownload}
-          style={{backgroundColor: '#f74755'}}>
-          Download
-        </Button>
-      </View>
-
-      <Snackbar
-        visible={visible}
-        onDismiss={onDismissSnackBar}
-        wrapperStyle={{top: 0, position: 'absolute'}}
-        duration={5000}
-        action={{
-          label: 'close',
-          onPress: onDismissSnackBar,
-        }}>
-        Wallpaper Downloaded!
-      </Snackbar>
-    </View>
+    </Provider>
   );
 }
 
