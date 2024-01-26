@@ -1,118 +1,104 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import * as React from 'react';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import AnimatedSplash from 'react-native-animated-splash-screen';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {QueryClient} from '@tanstack/react-query';
+import {LogBox} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
+import {createAsyncStoragePersister} from '@tanstack/query-async-storage-persister';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+// import HomeScreen from './src/screens/HomeScreen';
+// import Display from './src/screens/Display';
+// import PlayerCards from './src/screens/PlayerCards';
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import vGif from './assets/v_logo.gif';
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+const queryClient = new QueryClient({
+  defaultOptions: {queries: {retry: 2}, cacheTime: 1000 * 60 * 60 * 24},
 });
 
-export default App;
+const asyncStoragePersister = createAsyncStoragePersister({
+  storage: AsyncStorage,
+});
+
+const Stack = createStackNavigator();
+
+function AppContainer() {
+  return (
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{persister: asyncStoragePersister}}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName={'Home'}
+          screenOptions={{
+            gestureEnabled: true,
+            gestureDirection: 'vertical',
+            animationEnabled: false,
+            presentation: 'card',
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="Wallpaper"
+            component={Display}
+            options={{
+              headerShown: true,
+              title: 'Wallpaper',
+              headerStyle: {
+                backgroundColor: '#111111',
+              },
+              headerShadowVisible: false,
+              headerTintColor: '#fff',
+            }}
+          />
+
+          <Stack.Screen
+            name="PlayerCards"
+            component={PlayerCards}
+            options={{
+              headerShown: true,
+              title: 'Player Cards',
+              headerStyle: {
+                backgroundColor: '#111111',
+              },
+              headerShadowVisible: false,
+              headerTintColor: '#fff',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PersistQueryClientProvider>
+  );
+}
+
+export default function App() {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2500);
+  }, []);
+
+  return (
+    <AnimatedSplash
+      translucent={false}
+      isLoaded={isLoaded}
+      logoImage={vGif}
+      backgroundColor={'#000000'}
+      logoHeight={250}
+      logoWidth={250}>
+      <AppContainer />
+    </AnimatedSplash>
+  );
+}
