@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import AnimatedSplash from 'react-native-animated-splash-screen';
+import AnimatedSplash from './src/components/AnimatedSplash/AnimatedSplash';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -10,14 +10,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {createAsyncStoragePersister} from '@tanstack/query-async-storage-persister';
 
-// import HomeScreen from './src/screens/HomeScreen';
+import HomeScreen from './src/screens/HomeScreen';
 // import Display from './src/screens/Display';
 // import PlayerCards from './src/screens/PlayerCards';
 
-import vGif from './assets/v_logo.gif';
-
 const queryClient = new QueryClient({
-  defaultOptions: {queries: {retry: 2}, cacheTime: 1000 * 60 * 60 * 24},
+  defaultOptions: {queries: {retry: 2}},
 });
 
 const asyncStoragePersister = createAsyncStoragePersister({
@@ -48,7 +46,7 @@ function AppContainer() {
             }}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Wallpaper"
             component={Display}
             options={{
@@ -74,7 +72,7 @@ function AppContainer() {
               headerShadowVisible: false,
               headerTintColor: '#fff',
             }}
-          />
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </PersistQueryClientProvider>
@@ -94,7 +92,7 @@ export default function App() {
     <AnimatedSplash
       translucent={false}
       isLoaded={isLoaded}
-      logoImage={vGif}
+      logoImage={require('./src/assets/images/v_logo.gif')}
       backgroundColor={'#000000'}
       logoHeight={250}
       logoWidth={250}>
