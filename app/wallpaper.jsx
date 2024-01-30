@@ -3,7 +3,7 @@ import React from "react";
 
 export default function wallpaper() {
   return (
-    <View>
+    <View className="flex-1 items-center justify-center bg-white">
       <Text>wallpaper</Text>
     </View>
   );
