@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "valpapers_v2",
-    "slug": "valpapers_v2",
-    "version": "1.0.0",
+    "name": "valpapers",
+    "slug": "valpapers",
+    "version": "2.0.0",
     "orientation": "portrait",
+    "scheme": "valpapers",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
