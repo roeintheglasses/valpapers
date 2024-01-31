@@ -1,10 +1,6 @@
-import { Stack, Tabs } from "expo-router";
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { Tabs } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import CustomTabBar from "@components/CustomTabBar";
 
 export default function Layout() {
   const insets = useSafeAreaInsets();
