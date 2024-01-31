@@ -2,5 +2,6 @@
   "CDN_URL": "https://cdn.valpapers.tech",
   "PATHS": {
     "playerCards": "/playerCards"
-  }
+  },
+  "VALORANT_WALLPAPER_API_ENDPOINT": "https://valorant-api.com/v1/playercards"
 }

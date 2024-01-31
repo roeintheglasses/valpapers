@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  ImageBackground,
-  StatusBar,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Dimensions, ImageBackground } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
