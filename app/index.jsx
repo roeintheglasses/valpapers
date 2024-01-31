@@ -21,9 +21,8 @@ const Item_Width = Dev_Width - 0.6 * Dev_Width;
 
 export default function Home() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <View>
-        <ImageBackground
+    <View className="flex-1 items-center justify-center bg-white py-10 px-5">
+      {/* <ImageBackground
           source={{
             uri: VAL_LOGO,
           }}
@@ -42,42 +41,21 @@ export default function Home() {
               paddingTop: StatusBar.currentHeight,
             }}
           ></View>
-        </ImageBackground>
-
-        <View>
-          <Text>Top Picks</Text>
-        </View>
-
-        <View>
-          {/* <ImageCarousel navigation={navigation} data={topWallpapers} /> */}
-        </View>
-
-        <View>
-          <Text>Player Cards</Text>
-          <TouchableOpacity
-            onPress={() => {
-              // navigation.navigate("PlayerCards")
-            }}
-          >
-            <Text>Show More</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View>
-          <FlashList
-            data={MAIN_WALLPAPERS}
-            keyExtractor={(item, index) => {
-              return item.id + index.toString();
-            }}
-            renderItem={WallpaperCards}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={Separator}
-            alwaysBounceHorizontal={true}
-            bounces={true}
-          />
-        </View>
-      </View>
+        </ImageBackground> */}
+      <Text>Top Picks</Text>
+      <FlashList
+        data={MAIN_WALLPAPERS}
+        keyExtractor={(item, index) => {
+          return item.id + index.toString();
+        }}
+        renderItem={WallpaperCards}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        ItemSeparatorComponent={Separator}
+        alwaysBounceHorizontal={true}
+        bounces={true}
+        estimatedItemSize={35}
+      />
     </View>
   );
 }
@@ -98,18 +76,10 @@ function Separator() {
 }
 
 function WallpaperCards({ item, index }) {
-  if (index === 7) {
-    return (
-      <View style={styles.showMoreCard}>
-        <Text style={styles.showMoreCardText}>Show</Text>
-        <Text style={styles.showMoreCardText}>More</Text>
-      </View>
-    );
-  }
-
   return (
     <ImageBackground
       source={{ uri: item.uri }}
+      className="w-screen h-full"
       imageStyle={{
         borderRadius: 15,
         top: 0,
