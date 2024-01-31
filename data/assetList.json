@@ -1,0 +1,931 @@
+{
+  "MAIN_WALLPAPERS": [
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltcab091e37632e83d/6350404cd27c4a22ea5bcaf9/3_NightMode_Harbor_thmb.jpg",
+      "id": 680744879
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltbece2a183375a964/61fc3b9a2feb6a1bad2bc866/LNY_Sage-Lightbox.jpg",
+      "id": 886306479
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt0a76a9ed3d86adc9/5fd2a2c7e5f85744d50f33c5/VALORANT_VIPER_2.jpg",
+      "id": 1769649870
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt0c305a0019127894/5fd2a2d415555a337d774815/VALORANT_Sova_Dark.jpg",
+      "id": 843277505
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt432e7ad41b33d09b/5fd2a2c7d5cc7947663410f9/Skye_KeyArt_PR_4.jpg",
+      "id": 1062663274
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt4e01c3210f631495/5fd2a2dc90483e3eb51c3057/VALORANT_Sage_Light.jpg",
+      "id": 1830000046
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt7f334f50f559c4b5/5fd2a2dce5f85744d50f33c9/VALORANT_Reyna_Dark_2.jpg",
+      "id": 88969414
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt24b827486453f3ff/5fd2a2dd752123476ba03a97/VALORANT_Raze_Dark.jpg",
+      "id": 1536280940
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt09869f2f690f132b/5fd17732bed5bf30e30c5a04/VALORANT_phx_jett_2_galleryiamge.jpg",
+      "id": 4255241617
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt438ed7337d802260/5fd2a2d5d0df66524b5d3849/VALORANT_Phoenix_Dark.jpg",
+      "id": 6670927964
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt4f20a7ce76b0ef58/5fd2a2d450460c30dd54063a/KillJoy_Wallpapers_blue1.jpg",
+      "id": 6182219125
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltca6ea6b077533429/5fd2a2c67c43e43bf4196b69/VALORANT_Omen_Dark.jpg",
+      "id": 370036047
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt90da44b1a3809ba3/5fd2a2d58593bc52457ee3d7/VALORANT_Jett_Dark.jpg",
+      "id": 7656358472
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3dfe862d19874ebf/5fd2a7e859bd313bf8312d71/ValorantWallpaper_Ascent.jpg",
+      "id": 9263754291
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltbe08684abd48fe97/5fd2a7e97c43e43bf4196b8f/ValorantWallpaper_Icebox.jpg",
+      "id": 8187577513
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt48babe650c37dd95/5fd2a7eae5f85744d50f33df/ValorantWallpaper_SplitMap.jpg",
+      "id": 4357837172
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt113dffe00e904ffa/5fd2a7f6da1c393383d3f6a6/ValorantWallpaper_Bind.jpg",
+      "id": 2752473676
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltf5db2e52934a300b/5fd2a7f7bed5bf30e30c5f19/ValorantWallpaper_Haven.jpg",
+      "id": 9704020924
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3b9d019e6a99c32a/5fd2c35890483e3eb51c30d1/ValorantWallpaper_Oni.jpg",
+      "id": 13029251760
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt2d9820182260cced/5fd2c367d0df66524b5d3901/ValorantWallpaper_Prime.jpg",
+      "id": 751023859
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt4220117842e45159/5fd2c36650460c30dd5406bc/ValorantWallpaper_Reaver.jpg",
+      "id": 3827757662
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt5ada7412fb682aba/5fd2c35859bd313bf8312df7/ValorantWallpaper_Singularity.jpg",
+      "id": 11423485996
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt853e0eb619ddd610/5fd2c3aa7c43e43bf4196c27/Wallpaper_Schematic_Weapons.jpg",
+      "id": 13034685042
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltd25ebffc80a86b5a/5fd2c359e5f85744d50f3441/Elderflame_Dragon.jpg",
+      "id": 16108929839
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3fe38c1879a453ed/5fd2d14169cce544cffa5ac7/FFA_Deathmatch_Desktop.jpg",
+      "id": 1097286390
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltaf4dae47b30c2172/5fd2d140a84f233eaf61091a/VALORANT_Logo_V.jpg",
+      "id": 11825645730
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt1fae9fc87b7abca7/5fd2d142e5f85744d50f346f/Valorant_Wallpaper_Killbanners.jpg",
+      "id": 12042163154
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt1a0638fb60929838/5fd2a2eada1c393383d3f682/ValorantWallpaper_johnslatte3.jpg",
+      "id": 14027306326
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt888afed54b6fbf9f/5fd2a2eabed5bf30e30c5ef9/VALORANT_Breach_Dark.jpg",
+      "id": 12388349663
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blte2dfb783bbf65282/5fd2a327a84f233eaf610880/VALORANT_Brimm_Dark.jpg",
+      "id": 6796713828
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blta252b8345194dcfb/5fd2a2c769cce544cffa5a01/VALORANT_Cypher_Dark.jpg",
+      "id": 1224180749
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt55fbf1ac6e2d0111/5ece163b54e7166d098d096e/VALORANT_Viper_Lightbox.jpg",
+      "id": 10724611681
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt4de49ee60d73ae5d/5ece16f896a8996de38bc0df/VALORANT_Jett_Lightbox.jpg",
+      "id": 12552766943
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3d9bf296c46d42d2/5ece177408ac190a51c69e59/Beta_Key_Art_VALORANT_Lightbox.jpg",
+      "id": 10691435306
+    },
+    {
+      "uri": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blta73c882a72c618e3/5ed4150d08ac190a51c6ab88/VALORANT_Logo_V_Lightbox.jpg",
+      "id": 4583331299
+    }
+  ],
+  "COMMUNITY_WALLPAPERS": [
+    {
+      "id": "1075657.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1075657.jpg"
+    },
+    {
+      "id": "1135602.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1135602.png"
+    },
+    {
+      "id": "1201468.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1201468.jpg"
+    },
+    {
+      "id": "1203245.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1203245.jpg"
+    },
+    {
+      "id": "1203288.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1203288.jpg"
+    },
+    {
+      "id": "1203312.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1203312.jpg"
+    },
+    {
+      "id": "1210591.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1210591.jpg"
+    },
+    {
+      "id": "1211519.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1211519.jpg"
+    },
+    {
+      "id": "1211520.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1211520.jpg"
+    },
+    {
+      "id": "1215785.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1215785.jpg"
+    },
+    {
+      "id": "1239568.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1239568.jpg"
+    },
+    {
+      "id": "1249094.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1249094.jpg"
+    },
+    {
+      "id": "1253479.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1253479.jpg"
+    },
+    {
+      "id": "1261300.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1261300.png"
+    },
+    {
+      "id": "1263615.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1263615.jpg"
+    },
+    {
+      "id": "1264065.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1264065.png"
+    },
+    {
+      "id": "1272969.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1272969.jpg"
+    },
+    {
+      "id": "1276225.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1276225.jpg"
+    },
+    {
+      "id": "1280187.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1280187.jpg"
+    },
+    {
+      "id": "1282425.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282425.jpg"
+    },
+    {
+      "id": "1282427.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282427.jpg"
+    },
+    {
+      "id": "1282428.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282428.jpg"
+    },
+    {
+      "id": "1282429.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282429.jpg"
+    },
+    {
+      "id": "1282430.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282430.jpg"
+    },
+    {
+      "id": "1282431.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282431.jpg"
+    },
+    {
+      "id": "1282432.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282432.jpg"
+    },
+    {
+      "id": "1282434.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282434.jpg"
+    },
+    {
+      "id": "1282436.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282436.jpg"
+    },
+    {
+      "id": "1282437.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282437.jpg"
+    },
+    {
+      "id": "1282438.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282438.jpg"
+    },
+    {
+      "id": "1282439.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282439.jpg"
+    },
+    {
+      "id": "1282440.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282440.jpg"
+    },
+    {
+      "id": "1282441.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282441.jpg"
+    },
+    {
+      "id": "1282442.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282442.jpg"
+    },
+    {
+      "id": "1282444.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282444.jpg"
+    },
+    {
+      "id": "1282445.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282445.jpg"
+    },
+    {
+      "id": "1282446.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282446.jpg"
+    },
+    {
+      "id": "1282447.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282447.jpg"
+    },
+    {
+      "id": "1282448.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282448.jpg"
+    },
+    {
+      "id": "1282449.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282449.jpg"
+    },
+    {
+      "id": "1282450.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282450.jpg"
+    },
+    {
+      "id": "1282451.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282451.jpg"
+    },
+    {
+      "id": "1282452.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282452.jpg"
+    },
+    {
+      "id": "1282453.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282453.jpg"
+    },
+    {
+      "id": "1282454.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282454.jpg"
+    },
+    {
+      "id": "1282477.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282477.jpg"
+    },
+    {
+      "id": "1282484.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282484.jpg"
+    },
+    {
+      "id": "1282485.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282485.jpg"
+    },
+    {
+      "id": "1282486.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282486.jpg"
+    },
+    {
+      "id": "1282487.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282487.jpg"
+    },
+    {
+      "id": "1282488.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282488.jpg"
+    },
+    {
+      "id": "1282489.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282489.jpg"
+    },
+    {
+      "id": "1282490.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282490.jpg"
+    },
+    {
+      "id": "1282491.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282491.jpg"
+    },
+    {
+      "id": "1282493.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282493.jpg"
+    },
+    {
+      "id": "1282494.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282494.jpg"
+    },
+    {
+      "id": "1282496.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282496.jpg"
+    },
+    {
+      "id": "1282497.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282497.jpg"
+    },
+    {
+      "id": "1282498.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282498.jpg"
+    },
+    {
+      "id": "1282499.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282499.jpg"
+    },
+    {
+      "id": "1282500.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282500.jpg"
+    },
+    {
+      "id": "1282501.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282501.jpg"
+    },
+    {
+      "id": "1282502.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282502.jpg"
+    },
+    {
+      "id": "1282504.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282504.png"
+    },
+    {
+      "id": "1282505.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282505.jpg"
+    },
+    {
+      "id": "1282506.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282506.jpg"
+    },
+    {
+      "id": "1282507.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282507.jpg"
+    },
+    {
+      "id": "1282508.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282508.jpg"
+    },
+    {
+      "id": "1282509.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282509.jpg"
+    },
+    {
+      "id": "1282511.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282511.jpg"
+    },
+    {
+      "id": "1282512.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282512.jpg"
+    },
+    {
+      "id": "1282513.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282513.jpg"
+    },
+    {
+      "id": "1282514.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282514.jpg"
+    },
+    {
+      "id": "1282515.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282515.jpg"
+    },
+    {
+      "id": "1282516.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282516.jpg"
+    },
+    {
+      "id": "1282517.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282517.jpg"
+    },
+    {
+      "id": "1282518.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282518.jpg"
+    },
+    {
+      "id": "1282519.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282519.jpg"
+    },
+    {
+      "id": "1282520.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282520.jpg"
+    },
+    {
+      "id": "1282521.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282521.jpg"
+    },
+    {
+      "id": "1282523.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282523.png"
+    },
+    {
+      "id": "1282524.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282524.jpg"
+    },
+    {
+      "id": "1282525.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282525.jpg"
+    },
+    {
+      "id": "1282526.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282526.jpg"
+    },
+    {
+      "id": "1282527.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282527.jpg"
+    },
+    {
+      "id": "1282529.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282529.jpg"
+    },
+    {
+      "id": "1282530.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282530.jpg"
+    },
+    {
+      "id": "1282531.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282531.jpg"
+    },
+    {
+      "id": "1282532.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282532.jpg"
+    },
+    {
+      "id": "1282533.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282533.jpg"
+    },
+    {
+      "id": "1282534.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282534.jpg"
+    },
+    {
+      "id": "1282535.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282535.jpg"
+    },
+    {
+      "id": "1282536.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282536.jpg"
+    },
+    {
+      "id": "1282537.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282537.jpg"
+    },
+    {
+      "id": "1282538.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282538.jpg"
+    },
+    {
+      "id": "1282539.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282539.jpg"
+    },
+    {
+      "id": "1282541.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282541.jpg"
+    },
+    {
+      "id": "1282542.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282542.jpg"
+    },
+    {
+      "id": "1282543.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282543.jpg"
+    },
+    {
+      "id": "1282544.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282544.jpg"
+    },
+    {
+      "id": "1282545.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282545.jpg"
+    },
+    {
+      "id": "1282546.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282546.jpg"
+    },
+    {
+      "id": "1282547.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282547.jpg"
+    },
+    {
+      "id": "1282548.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282548.jpg"
+    },
+    {
+      "id": "1282549.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282549.jpg"
+    },
+    {
+      "id": "1282550.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282550.jpg"
+    },
+    {
+      "id": "1282551.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282551.jpg"
+    },
+    {
+      "id": "1282552.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282552.jpg"
+    },
+    {
+      "id": "1282553.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282553.jpg"
+    },
+    {
+      "id": "1282554.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282554.jpg"
+    },
+    {
+      "id": "1282555.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282555.jpg"
+    },
+    {
+      "id": "1282556.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282556.png"
+    },
+    {
+      "id": "1282557.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282557.jpg"
+    },
+    {
+      "id": "1282558.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282558.jpg"
+    },
+    {
+      "id": "1282559.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282559.jpg"
+    },
+    {
+      "id": "1282560.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282560.jpg"
+    },
+    {
+      "id": "1282561.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282561.jpg"
+    },
+    {
+      "id": "1282562.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282562.jpg"
+    },
+    {
+      "id": "1282563.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282563.jpg"
+    },
+    {
+      "id": "1282564.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282564.jpg"
+    },
+    {
+      "id": "1282565.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282565.jpg"
+    },
+    {
+      "id": "1282566.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282566.jpg"
+    },
+    {
+      "id": "1282567.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282567.jpg"
+    },
+    {
+      "id": "1282568.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282568.jpg"
+    },
+    {
+      "id": "1282569.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282569.jpg"
+    },
+    {
+      "id": "1282570.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282570.jpg"
+    },
+    {
+      "id": "1282571.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282571.jpg"
+    },
+    {
+      "id": "1282572.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282572.jpg"
+    },
+    {
+      "id": "1282573.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282573.jpg"
+    },
+    {
+      "id": "1282574.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282574.jpg"
+    },
+    {
+      "id": "1282575.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282575.jpg"
+    },
+    {
+      "id": "1282576.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282576.jpg"
+    },
+    {
+      "id": "1282577.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282577.jpg"
+    },
+    {
+      "id": "1282578.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282578.jpg"
+    },
+    {
+      "id": "1282579.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282579.jpg"
+    },
+    {
+      "id": "1282580.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282580.png"
+    },
+    {
+      "id": "1282581.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282581.jpg"
+    },
+    {
+      "id": "1282582.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282582.jpg"
+    },
+    {
+      "id": "1282583.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282583.jpg"
+    },
+    {
+      "id": "1282584.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282584.jpg"
+    },
+    {
+      "id": "1282585.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282585.jpg"
+    },
+    {
+      "id": "1282586.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282586.jpg"
+    },
+    {
+      "id": "1282587.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282587.jpg"
+    },
+    {
+      "id": "1282588.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282588.jpg"
+    },
+    {
+      "id": "1282590.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282590.jpg"
+    },
+    {
+      "id": "1282591.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282591.jpg"
+    },
+    {
+      "id": "1282592.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282592.jpg"
+    },
+    {
+      "id": "1282593.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282593.jpg"
+    },
+    {
+      "id": "1282594.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282594.jpg"
+    },
+    {
+      "id": "1282595.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282595.jpg"
+    },
+    {
+      "id": "1282596.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282596.jpg"
+    },
+    {
+      "id": "1282597.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282597.jpg"
+    },
+    {
+      "id": "1282599.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282599.jpg"
+    },
+    {
+      "id": "1282600.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282600.jpg"
+    },
+    {
+      "id": "1282601.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282601.jpg"
+    },
+    {
+      "id": "1282602.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282602.jpg"
+    },
+    {
+      "id": "1282603.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282603.jpg"
+    },
+    {
+      "id": "1282604.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282604.jpg"
+    },
+    {
+      "id": "1282605.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282605.jpg"
+    },
+    {
+      "id": "1282606.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282606.jpg"
+    },
+    {
+      "id": "1282607.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282607.jpg"
+    },
+    {
+      "id": "1282608.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282608.jpg"
+    },
+    {
+      "id": "1282609.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282609.jpg"
+    },
+    {
+      "id": "1282610.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282610.jpg"
+    },
+    {
+      "id": "1282612.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282612.jpg"
+    },
+    {
+      "id": "1282613.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282613.jpg"
+    },
+    {
+      "id": "1282614.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282614.jpg"
+    },
+    {
+      "id": "1282615.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282615.jpg"
+    },
+    {
+      "id": "1282616.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282616.png"
+    },
+    {
+      "id": "1282618.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282618.jpg"
+    },
+    {
+      "id": "1282619.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282619.png"
+    },
+    {
+      "id": "1282621.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282621.jpg"
+    },
+    {
+      "id": "1282623.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282623.jpg"
+    },
+    {
+      "id": "1282624.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282624.jpg"
+    },
+    {
+      "id": "1282628.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282628.jpg"
+    },
+    {
+      "id": "1282629.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282629.jpg"
+    },
+    {
+      "id": "1282637.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1282637.jpg"
+    },
+    {
+      "id": "1293737.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1293737.jpg"
+    },
+    {
+      "id": "1295178.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1295178.jpg"
+    },
+    {
+      "id": "1297410.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1297410.jpg"
+    },
+    {
+      "id": "1298300.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1298300.jpg"
+    },
+    {
+      "id": "1304305.jpeg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1304305.jpeg"
+    },
+    {
+      "id": "1305415.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1305415.jpg"
+    },
+    {
+      "id": "1305420.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1305420.jpg"
+    },
+    {
+      "id": "1305421.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1305421.jpg"
+    },
+    {
+      "id": "1305422.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1305422.jpg"
+    },
+    {
+      "id": "1307850.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1307850.jpg"
+    },
+    {
+      "id": "1308410.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1308410.jpg"
+    },
+    {
+      "id": "1315738.jpg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1315738.jpg"
+    },
+    {
+      "id": "1321613.jpeg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1321613.jpeg"
+    },
+    {
+      "id": "1322722.jpeg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1322722.jpeg"
+    },
+    {
+      "id": "1327330.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1327330.png"
+    },
+    {
+      "id": "1328104.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1328104.png"
+    },
+    {
+      "id": "1330017.png",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1330017.png"
+    },
+    {
+      "id": "1345035.jpeg",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/1345035.jpeg"
+    },
+    {
+      "id": "index.json",
+      "uri": "https://cdn.valpapers.tech/communityWallpapers/index.json"
+    }
+  ],
+  "VAL_LOGO": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltaf4dae47b30c2172/5fd2d140a84f233eaf61091a/VALORANT_Logo_V.jpg"
+}
