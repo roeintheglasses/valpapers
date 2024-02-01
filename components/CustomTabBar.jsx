@@ -14,15 +14,6 @@ const styles = StyleSheet.create({
   },
   blurView: {
     flexDirection: "row",
-    flex: 1,
-    marginHorizontal: 6,
-    marginTop: 2,
-    marginBottom: 2,
-    paddingTop: 4,
-    paddingBottom: 4,
-    overflow: "hidden",
-    borderRadius: 20,
-    justifyContent: "space-between",
   },
   tabButton: {
     flex: 1,
@@ -40,52 +31,11 @@ const styles = StyleSheet.create({
   },
 });
 const highLightColor = "#ccb041";
-const TabIcon = ({ isFocused }) => (
-  <MotiView
-    animate={{
-      backgroundColor: isFocused ? highLightColor : "transparent",
-      paddingHorizontal: isFocused ? 15 : 0,
-    }}
-    transition={{
-      type: "timing",
-      duration: 200,
-    }}
-    style={styles.motiView}
-  >
-    <MCI name="cards-outline" size={20} color="#fff" />
-  </MotiView>
-);
 
-const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
-  <TouchableOpacity
-    accessibilityRole="button"
-    accessibilityState={isFocused ? { selected: true } : {}}
-    onPress={onPress}
-    onLongPress={onLongPress}
-    style={styles.tabButton}
-  >
-    <TabIcon isFocused={isFocused} />
-    <MotiText
-      animate={{
-        color: isFocused ? highLightColor : "#fff",
-      }}
-      transition={{
-        type: "timing",
-        duration: 200,
-      }}
-      style={styles.labelText}
-    >
-      {label}
-    </MotiText>
-  </TouchableOpacity>
-);
-
-export default function MyTabBar({ state, descriptors, navigation }) {
+export default function CustomTabBar({ state, descriptors, navigation }) {
   const renderTab = (route, index) => {
     const { options } = descriptors[route.key];
     const label = options.tabBarLabel ?? options.title ?? route.name;
-
-    console.log(label);
 
     if (["Not Found", "sitemap", "Favorites", "+not-found"].includes(label))
       return null;
@@ -127,11 +77,52 @@ export default function MyTabBar({ state, descriptors, navigation }) {
       <BlurView
         tint="dark"
         experimentalBlurMethod="dimezisBlurView"
-        intensity={80}
+        intensity={100}
         style={styles.blurView}
+        className="flex-1 justify-between px-2 overflow-hidden"
       >
         {state.routes.map(renderTab)}
       </BlurView>
     </View>
   );
 }
+
+const TabIcon = ({ isFocused }) => (
+  <MotiView
+    animate={{
+      backgroundColor: isFocused ? highLightColor : "transparent",
+      paddingHorizontal: isFocused ? 15 : 0,
+    }}
+    transition={{
+      type: "timing",
+      duration: 200,
+    }}
+    style={styles.motiView}
+  >
+    <MCI name="cards-outline" size={20} color="#fff" />
+  </MotiView>
+);
+
+const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
+  <TouchableOpacity
+    accessibilityRole="button"
+    accessibilityState={isFocused ? { selected: true } : {}}
+    onPress={onPress}
+    onLongPress={onLongPress}
+    style={styles.tabButton}
+  >
+    <TabIcon isFocused={isFocused} />
+    <MotiText
+      animate={{
+        color: isFocused ? highLightColor : "#fff",
+      }}
+      transition={{
+        type: "timing",
+        duration: 200,
+      }}
+      style={styles.labelText}
+    >
+      {label}
+    </MotiText>
+  </TouchableOpacity>
+);
