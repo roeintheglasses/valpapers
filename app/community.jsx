@@ -21,7 +21,7 @@ const Item_Width = Dev_Width - 0.6 * Dev_Width;
 
 export default function Home() {
   return (
-    <View className="flex-1 items-center justify-center bg-white py-10 px-5">
+    <View className="flex-1 items-center justify-center bg-slate-700 py-10 px-5">
       {/* <ImageBackground
           source={{
             uri: VAL_LOGO,

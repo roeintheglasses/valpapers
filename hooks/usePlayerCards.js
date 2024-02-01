@@ -20,9 +20,9 @@ async function fetchWallpapers() {
   }
 }
 
-export default function useWallpapers() {
+export default function usePlayerCards() {
   return useQuery({
-    queryKey: ["wallpapers"],
+    queryKey: ["playerCards"],
     queryFn: fetchWallpapers,
     config: {
       retry: (failureCount, error) => {

@@ -1,62 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  ImageBackground,
-  StatusBar,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Dimensions, ImageBackground } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
-
-// import useWallpapers from "../services/valorantApi/wallpapers";
-// import ImageCarousel from "../components/ImageCarousel";
 import { MAIN_WALLPAPERS, VAL_LOGO } from "@data/assetList.json";
-import { CDN_URL, PATHS } from "@data/constants.json";
 
 const Dev_Height = Dimensions.get("screen").height;
 const Dev_Width = Dimensions.get("screen").width;
 const Item_Width = Dev_Width - 0.6 * Dev_Width;
 
+import Header from "@components/Header";
+
 export default function Home() {
   return (
-    <View className="flex-1 items-center justify-center bg-white py-10 px-5">
-      {/* <ImageBackground
-          source={{
-            uri: VAL_LOGO,
+    <>
+      <View className="flex-1 items-center justify-center bg-slate-700 py-10 px-5">
+        <Text className="text-white">Top Picks</Text>
+        <FlashList
+          data={MAIN_WALLPAPERS}
+          keyExtractor={(item, index) => {
+            return item.id + index.toString();
           }}
-          imageStyle={{
-            height: "100%",
-            width: "100%",
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-        >
-          <View
-            style={{
-              height: "100%",
-              width: "100%",
-              alignItems: "center",
-              paddingTop: StatusBar.currentHeight,
-            }}
-          ></View>
-        </ImageBackground> */}
-      <Text>Top Picks</Text>
-      <FlashList
-        data={MAIN_WALLPAPERS}
-        keyExtractor={(item, index) => {
-          return item.id + index.toString();
-        }}
-        renderItem={WallpaperCards}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={Separator}
-        alwaysBounceHorizontal={true}
-        bounces={true}
-        estimatedItemSize={35}
-      />
-    </View>
+          renderItem={WallpaperCards}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={Separator}
+          alwaysBounceHorizontal={true}
+          bounces={true}
+          estimatedItemSize={35}
+        />
+      </View>
+    </>
   );
 }
 
