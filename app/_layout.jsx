@@ -10,6 +10,19 @@ import { StatusBar } from "expo-status-bar";
 import Header from "@components/Header";
 import MyTabBar from "@components/CustomTabBar";
 
+import { QueryClient } from "@tanstack/react-query";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 2 }, cacheTime: 1000 * 60 * 60 * 24 },
+});
+
+const asyncStoragePersister = createAsyncStoragePersister({
+  storage: AsyncStorage,
+});
+
 // Import global styles
 import "../global.css";
 
@@ -41,49 +54,54 @@ export default function Layout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar backgroundColor="#1b2228" />
-        <Header />
-        {/* <Stack
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister: asyncStoragePersister }}
+    >
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <StatusBar backgroundColor="#1b2228" />
+          <Header />
+          {/* <Stack
           initialRouteName="index"
           screenOptions={{ headerShown: false }}
         /> */}
-        <Tabs
-          initialRouteName="index"
-          screenOptions={{ headerShown: false }}
-          tabBar={MyTabBar}
-        >
-          <Tabs.Screen
-            name="community"
-            options={{
-              href: "/community",
-              tabBarLabel: "Community",
-            }}
-          />
-          <Tabs.Screen
-            name="index"
-            options={{
-              href: "/",
-              tabBarLabel: "Home",
-            }}
-          />
-          <Tabs.Screen
-            name="cards"
-            options={{
-              href: "/cards",
-              tabBarLabel: "Cards",
-            }}
-          />
-          <Tabs.Screen
-            name="favorites"
-            options={{
-              href: null,
-              tabBarLabel: "Favorites",
-            }}
-          />
-        </Tabs>
-      </SafeAreaView>
-    </GestureHandlerRootView>
+          <Tabs
+            initialRouteName="index"
+            screenOptions={{ headerShown: false }}
+            tabBar={MyTabBar}
+          >
+            <Tabs.Screen
+              name="community"
+              options={{
+                href: "/community",
+                tabBarLabel: "Community",
+              }}
+            />
+            <Tabs.Screen
+              name="index"
+              options={{
+                href: "/",
+                tabBarLabel: "Home",
+              }}
+            />
+            <Tabs.Screen
+              name="cards"
+              options={{
+                href: "/cards",
+                tabBarLabel: "Cards",
+              }}
+            />
+            <Tabs.Screen
+              name="favorites"
+              options={{
+                href: null,
+                tabBarLabel: "Favorites",
+              }}
+            />
+          </Tabs>
+        </SafeAreaView>
+      </GestureHandlerRootView>
+    </PersistQueryClientProvider>
   );
 }
