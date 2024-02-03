@@ -189,7 +189,18 @@ function PlayerCardItem({ item, index }) {
 
 // Utils
 function getIntroText() {
-  const intros = ["Top Pick", "Newest Entry", "Most Popular", "Trending Val"];
+  const intros = [
+    "Top Pick",
+    "Eco Round Gem",
+    "Most Popular",
+    "Trending Val",
+    "Ace Art",
+    "Spiky Sensation",
+    "GG Graphics",
+    "Flick Faves",
+    "Dank Drops",
+    "Yeet Yarns",
+  ];
   return intros[Math.floor(Math.random() * intros.length)];
 }
 
