@@ -1,16 +1,17 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { BlurView } from "expo-blur";
 import MCI from "@expo/vector-icons/MaterialCommunityIcons";
 import { MotiView, MotiText } from "moti";
 
+const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    height: 90,
+    height: 80,
+    margin: 0,
   },
   blurView: {
     flexDirection: "row",
@@ -30,7 +31,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "Poppins-Bold",
     fontSize: 12,
-    paddingTop: 5,
+    paddingTop: 4,
+    paddingBottom: 0,
+    marginBottom: 0,
   },
 });
 const highLightColor = "#ff4655";
@@ -81,9 +84,9 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
       <BlurView
         tint="dark"
         experimentalBlurMethod="dimezisBlurView"
-        intensity={75}
+        intensity={100}
         style={styles.blurView}
-        className="flex-1 justify-between rounded-xl mx-4 my-2 px-2 pt-2 overflow-hidden"
+        className="flex-1 justify-between items-center px-4"
       >
         {state.routes.map(renderTab)}
       </BlurView>
@@ -104,7 +107,7 @@ const TabIcon = ({ isFocused }) => (
     }}
     style={styles.motiView}
   >
-    <MCI name="cards-outline" size={20} color="#fff" />
+    <MCI name="cards-outline" size={22} color="#fff" />
   </MotiView>
 );
 

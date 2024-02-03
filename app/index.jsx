@@ -8,8 +8,13 @@ import {
 } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { FlashList } from "@shopify/flash-list";
-import { MAIN_WALLPAPERS, COMMUNITY_WALLPAPERS } from "@data/assetList.json";
+import {
+  MAIN_WALLPAPERS,
+  COMMUNITY_WALLPAPERS,
+  PLAYER_CARDS,
+} from "@data/assetList.json";
 import { Image } from "expo-image";
+import { ScrollView } from "react-native-gesture-handler";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -22,14 +27,21 @@ function getRandomWallpapers(list, number) {
 
 function Home() {
   return (
-    <View className="flex-1 items-center justify-start bg-main py-5 px-5">
+    <View className="flex-1 items-center justify-start bg-main px-2">
       <WallpaperCarousel />
-      <CommunityWallpaperGrid />
-      <PlayerCardWallpaperGrid />
+      <ScrollView>
+        <View style={{ height: 300 }}>
+          <PlayerCardWallpaperGrid />
+        </View>
+        <View style={{ height: 300 }}>
+          <CommunityWallpaperGrid />
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
+// Wallpaper Carousel Components
 function WallpaperCarousel() {
   return (
     <Carousel
@@ -49,61 +61,13 @@ function WallpaperCarousel() {
   );
 }
 
-function CommunityWallpaperGrid() {
-  return (
-    <View className="flex-1 items-start justify-start bg-main">
-      <Text
-        style={{ paddingHorizontal: 12, paddingTop: 20 }}
-        className="font-poppinsBold text-2xl text-slate-200"
-      >
-        Community Valpapers
-      </Text>
-      <FlashList
-        data={getRandomWallpapers(COMMUNITY_WALLPAPERS, 20)}
-        keyExtractor={function keyExtractor(item, index) {
-          return `${index}-${item.id}-FlashList-Community`;
-        }}
-        renderItem={WallpaperItem}
-        showsHorizontalScrollIndicator={false}
-        estimatedItemSize={20}
-        horizontal={true}
-        contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 10 }}
-      />
-    </View>
-  );
-}
-
-function PlayerCardWallpaperGrid() {
-  return (
-    <View className="flex-1 items-start justify-start bg-main">
-      <Text
-        style={{ paddingHorizontal: 12, paddingTop: 20 }}
-        className="font-poppinsBold text-2xl text-slate-200"
-      >
-        Community Valpapers
-      </Text>
-      <FlashList
-        data={getRandomWallpapers(COMMUNITY_WALLPAPERS, 20)}
-        keyExtractor={function keyExtractor(item, index) {
-          return `${index}-${item.id}-FlashList-PlayerCards`;
-        }}
-        renderItem={WallpaperItem}
-        showsHorizontalScrollIndicator={false}
-        estimatedItemSize={20}
-        horizontal={true}
-        contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 10 }}
-      />
-    </View>
-  );
-}
-
 function WallpaperCard({ item, index }) {
   return (
     <TouchableOpacity
       style={{
-        height: "100%",
         width: screenWidth,
-        paddingHorizontal: 10,
+        paddingHorizontal: 5,
+        aspectRatio: "16/9",
       }}
     >
       <ImageBackground
@@ -119,13 +83,38 @@ function WallpaperCard({ item, index }) {
   );
 }
 
-function WallpaperItem({ item, index }) {
+// Community Wallpapers Components
+function CommunityWallpaperGrid() {
+  return (
+    <>
+      <Text
+        style={{ paddingHorizontal: 12, paddingTop: 20 }}
+        className="font-poppinsBold text-2xl text-slate-200"
+      >
+        Community Valpapers
+      </Text>
+      <FlashList
+        data={getRandomWallpapers(COMMUNITY_WALLPAPERS, 20)}
+        keyExtractor={function keyExtractor(item, index) {
+          return `${index}-${item.id}-FlashList-Community`;
+        }}
+        nestedScrollEnabled={true}
+        renderItem={CommunityWallpaperItem}
+        showsHorizontalScrollIndicator={false}
+        estimatedItemSize={20}
+        horizontal={true}
+        contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 10 }}
+      />
+    </>
+  );
+}
+function CommunityWallpaperItem({ item, index }) {
   return (
     <TouchableOpacity
       style={{
-        height: screenHeight / 5,
-        width: screenWidth / 1.3,
+        width: screenWidth / 1.5,
         paddingRight: 20,
+        aspectRatio: "16/9",
       }}
     >
       <Image
@@ -143,6 +132,57 @@ function WallpaperItem({ item, index }) {
   );
 }
 
+// Player Cards Wallpapers Components
+function PlayerCardWallpaperGrid() {
+  return (
+    <>
+      <Text
+        style={{ paddingHorizontal: 12, paddingTop: 20 }}
+        className="font-poppinsBold text-2xl text-slate-200"
+      >
+        Player Cards
+      </Text>
+      <FlashList
+        data={getRandomWallpapers(PLAYER_CARDS, 20)}
+        keyExtractor={function keyExtractor(item, index) {
+          return `${index}-${item.id}-FlashList-PlayerCards`;
+        }}
+        nestedScrollEnabled={true}
+        renderItem={PlayerCardItem}
+        showsHorizontalScrollIndicator={false}
+        estimatedItemSize={20}
+        horizontal={true}
+        contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 10 }}
+      />
+    </>
+  );
+}
+
+function PlayerCardItem({ item, index }) {
+  return (
+    <TouchableOpacity
+      style={{
+        width: screenWidth / 3,
+        paddingRight: 20,
+        aspectRatio: "9/16",
+      }}
+    >
+      <Image
+        source={{ uri: item.uri }}
+        style={{
+          height: "100%",
+          width: "100%",
+          marginVertical: 10,
+          borderRadius: 10,
+          padding: 10,
+        }}
+        placeholder={blurhash}
+      />
+    </TouchableOpacity>
+  );
+}
+
+// Utils
 function getIntroText() {
   const intros = ["Top Pick", "Newest Entry", "Most Popular", "Trending Val"];
   return intros[Math.floor(Math.random() * intros.length)];
