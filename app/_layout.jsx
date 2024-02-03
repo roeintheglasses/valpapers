@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Tabs } from "expo-router";
+import { Tabs, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 
@@ -43,8 +43,12 @@ export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar style="light" backgroundColor="#1b2228" />
+        <StatusBar backgroundColor="#1b2228" />
         <Header />
+        {/* <Stack
+          initialRouteName="index"
+          screenOptions={{ headerShown: false }}
+        /> */}
         <Tabs
           initialRouteName="index"
           screenOptions={{ headerShown: false }}

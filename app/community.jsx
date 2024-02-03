@@ -1,23 +1,20 @@
-import {
-  View,
-  Text,
-  Dimensions,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
-
+import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import { MasonryFlashList } from "@shopify/flash-list";
-
-import { COMMUNITY_WALLPAPERS, VAL_LOGO } from "@data/assetList.json";
+import { COMMUNITY_WALLPAPERS } from "@data/assetList.json";
 import { Image } from "expo-image";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
-export default function Home() {
+export default function CommunityValpapers() {
   return (
-    <View className="flex-1 items-center justify-start bg-main px-2">
-      <Text>Top Picks</Text>
+    <View className="flex-1 items-start justify-start bg-main px-2">
+      <Text
+        style={{ paddingHorizontal: 12, paddingBottom: 5 }}
+        className="font-poppinsBold text-2xl text-slate-200"
+      >
+        Community Valpapers
+      </Text>
       <View
         className="px-2"
         style={{ height: screenHeight - 220, width: screenWidth }}
@@ -45,7 +42,6 @@ function CommunityWallpaperItem({ item, index }) {
         borderRadius: 10,
         aspectRatio: "4/5",
         alignItems: "center",
-        alignSelf: "center",
         paddingVertical: 10,
       }}
     >

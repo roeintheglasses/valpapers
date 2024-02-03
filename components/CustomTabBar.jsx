@@ -10,15 +10,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 80,
-    margin: 0,
+    height: 60,
   },
   blurView: {
     flexDirection: "row",
   },
   tabButton: {
     flex: 1,
-    justifyContent: "center",
+    height: "100%",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   motiView: {
@@ -31,13 +31,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "Poppins-Bold",
     fontSize: 12,
-    paddingTop: 4,
-    paddingBottom: 0,
-    marginBottom: 0,
   },
 });
 const highLightColor = "#ff4655";
-const highLightColor2 = "#ff4655";
 
 export default function CustomTabBar({ state, descriptors, navigation }) {
   const renderTab = (route, index) => {
@@ -124,6 +120,7 @@ const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
       animate={{
         color: isFocused ? highLightColor : "#fff",
         scale: isFocused ? 1.1 : 1,
+        paddingTop: isFocused ? 2 : 0,
       }}
       transition={{
         type: "timing",
