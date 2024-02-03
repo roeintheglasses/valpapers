@@ -99,6 +99,16 @@ export default function Layout() {
                 tabBarLabel: "Favorites",
               }}
             />
+            <Tabs.Screen
+              name="display"
+              options={{
+                href: "/display",
+                tabBarLabel: "Display",
+                tabBarStyle: {
+                  display: "none",
+                },
+              }}
+            />
           </Tabs>
         </SafeAreaView>
       </GestureHandlerRootView>

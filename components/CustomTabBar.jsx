@@ -34,7 +34,11 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
     const { options } = descriptors[route.key];
     const label = options.tabBarLabel ?? options.title ?? route.name;
 
-    if (["Not Found", "sitemap", "Favorites", "+not-found"].includes(label))
+    if (
+      ["Not Found", "sitemap", "Favorites", "+not-found", "Display"].includes(
+        label
+      )
+    )
       return null;
 
     const isFocused = state.index === index;

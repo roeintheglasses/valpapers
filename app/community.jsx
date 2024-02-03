@@ -2,6 +2,8 @@ import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import { MasonryFlashList } from "@shopify/flash-list";
 import { COMMUNITY_WALLPAPERS } from "@data/assetList.json";
 import { Image } from "expo-image";
+import { Link } from "expo-router";
+
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
@@ -35,26 +37,35 @@ export default function CommunityValpapers() {
 
 function CommunityWallpaperItem({ item, index }) {
   const wallpaperBlurHash = getRandomBlurHash();
+
   return (
-    <TouchableOpacity
-      style={{
-        height: screenHeight / 4,
-        borderRadius: 10,
-        aspectRatio: "4/5",
-        alignItems: "center",
-        paddingVertical: 10,
+    <Link
+      href={{
+        pathname: "/display",
+        params: { item, uri: item.uri },
       }}
+      asChild
     >
-      <Image
-        source={{ uri: item.uri }}
+      <TouchableOpacity
         style={{
-          height: "100%",
-          width: "100%",
+          height: screenHeight / 4,
           borderRadius: 10,
+          aspectRatio: "4/5",
+          alignItems: "center",
+          marginVertical: 10,
         }}
-        placeholder={wallpaperBlurHash}
-        recyclingKey={`${item.id + index.toString()}-communityWallpaper`}
-      />
-    </TouchableOpacity>
+      >
+        <Image
+          source={{ uri: item.uri }}
+          style={{
+            height: "100%",
+            width: "100%",
+            borderRadius: 10,
+          }}
+          placeholder={wallpaperBlurHash}
+          recyclingKey={`${item.id + index.toString()}-communityWallpaper`}
+        />
+      </TouchableOpacity>
+    </Link>
   );
 }
