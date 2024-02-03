@@ -28,12 +28,14 @@ function getRandomWallpapers(list, number) {
 function Home() {
   return (
     <View className="flex-1 items-center justify-start bg-main px-2">
-      <WallpaperCarousel />
       <ScrollView>
-        <View style={{ height: 300 }}>
+        <View style={{ height: screenHeight / 4 }}>
+          <WallpaperCarousel />
+        </View>
+        <View style={{ height: screenHeight / 2.8 }}>
           <PlayerCardWallpaperGrid />
         </View>
-        <View style={{ height: 300 }}>
+        <View style={{ height: screenHeight / 2.6 }}>
           <CommunityWallpaperGrid />
         </View>
       </ScrollView>
