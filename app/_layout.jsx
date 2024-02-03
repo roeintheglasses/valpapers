@@ -5,6 +5,8 @@ import { Tabs } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 
+import { StatusBar } from "expo-status-bar";
+
 import Header from "@components/Header";
 import MyTabBar from "@components/CustomTabBar";
 
@@ -41,6 +43,7 @@ export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar style="light" backgroundColor="#1b2228" />
         <Header />
         <Tabs
           initialRouteName="index"

@@ -15,11 +15,9 @@ import {
 } from "@data/assetList.json";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
+import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
-
-const blurhash =
-  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 function getRandomWallpapers(list, number) {
   return list.sort(() => 0.5 - Math.random()).slice(0, number);
@@ -111,6 +109,8 @@ function CommunityWallpaperGrid() {
   );
 }
 function CommunityWallpaperItem({ item, index }) {
+  const communityWallpaperBlurHash = getRandomBlurHash();
+
   return (
     <TouchableOpacity
       style={{
@@ -128,7 +128,7 @@ function CommunityWallpaperItem({ item, index }) {
           borderRadius: 10,
           padding: 10,
         }}
-        placeholder={blurhash}
+        placeholder={communityWallpaperBlurHash}
       />
     </TouchableOpacity>
   );
@@ -161,6 +161,7 @@ function PlayerCardWallpaperGrid() {
 }
 
 function PlayerCardItem({ item, index }) {
+  const playerCardBlurHash = getRandomBlurHash();
   return (
     <TouchableOpacity
       style={{
@@ -178,7 +179,7 @@ function PlayerCardItem({ item, index }) {
           borderRadius: 10,
           padding: 10,
         }}
-        placeholder={blurhash}
+        placeholder={playerCardBlurHash}
       />
     </TouchableOpacity>
   );
