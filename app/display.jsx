@@ -12,23 +12,17 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import usePinchGesture from "@hooks/usePinchGesture";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
 export default function Display() {
   const wallpaperBlurHash = getRandomBlurHash();
+
   const local = useLocalSearchParams();
   const { uri: imageUri } = local;
 
-  const scale = useSharedValue(1);
-
-  const pinchGesture = Gesture.Pinch()
-    .onUpdate((event) => {
-      scale.value = event.scale;
-    })
-    .onEnd(() => {
-      scale.value = 1;
-    });
+  const { scale, pinchGesture } = usePinchGesture();
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
