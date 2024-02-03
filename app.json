@@ -5,31 +5,27 @@
     "version": "2.0.0",
     "orientation": "portrait",
     "scheme": "valpapers",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher.png",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1c1e2b"
+      "backgroundColor": "#cc3f3f"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#1c1e2b"
+        "foregroundImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_foreground.png",
+        "backgroundImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_background.png",
+        "monochromeImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_monochrome.png"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icons/web/favicon.ico"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ]
+    "plugins": ["expo-router", "expo-font"]
   }
 }
