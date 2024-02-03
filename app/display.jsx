@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 import { useLocalSearchParams } from "expo-router";
@@ -35,25 +35,13 @@ export default function Display() {
   }));
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View
-        style={{ height: screenHeight - 160, width: screenWidth }}
-        className="bg-main"
-      >
+    <GestureHandlerRootView style={styles.flexContainer}>
+      <View style={styles.container} className="bg-main">
         <GestureDetector gesture={pinchGesture}>
-          <Animated.View
-            style={[
-              { alignItems: "center", justifyContent: "center" },
-              animatedStyle,
-            ]}
-          >
+          <Animated.View style={[styles.centerContent, animatedStyle]}>
             <Image
               source={{ uri: imageUri }}
-              style={{
-                height: screenHeight / 3,
-                width: "100%",
-                borderRadius: 10,
-              }}
+              style={styles.image}
               placeholder={wallpaperBlurHash}
               contentFit="contain"
             />
@@ -63,3 +51,24 @@ export default function Display() {
     </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+  },
+  container: {
+    height: screenHeight - 160,
+    width: screenWidth,
+    alignItems: "start",
+    justifyContent: "center",
+  },
+  centerContent: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    height: screenHeight / 3,
+    width: "100%",
+    borderRadius: 10,
+  },
+});
