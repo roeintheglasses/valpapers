@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 70,
+    height: 90,
   },
   blurView: {
     flexDirection: "row",
@@ -28,9 +28,13 @@ const styles = StyleSheet.create({
   },
   labelText: {
     color: "#fff",
+    fontFamily: "Poppins-Bold",
+    fontSize: 12,
+    paddingTop: 5,
   },
 });
-const highLightColor = "#ccb041";
+const highLightColor = "#ff4655";
+const highLightColor2 = "#ff4655";
 
 export default function CustomTabBar({ state, descriptors, navigation }) {
   const renderTab = (route, index) => {
@@ -77,9 +81,9 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
       <BlurView
         tint="dark"
         experimentalBlurMethod="dimezisBlurView"
-        intensity={100}
+        intensity={75}
         style={styles.blurView}
-        className="flex-1 justify-between px-2 overflow-hidden"
+        className="flex-1 justify-between rounded-xl mx-4 my-2 px-2 pt-2 overflow-hidden"
       >
         {state.routes.map(renderTab)}
       </BlurView>
@@ -92,6 +96,7 @@ const TabIcon = ({ isFocused }) => (
     animate={{
       backgroundColor: isFocused ? highLightColor : "transparent",
       paddingHorizontal: isFocused ? 15 : 0,
+      scale: isFocused ? 1.1 : 1,
     }}
     transition={{
       type: "timing",
@@ -115,6 +120,7 @@ const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
     <MotiText
       animate={{
         color: isFocused ? highLightColor : "#fff",
+        scale: isFocused ? 1.1 : 1,
       }}
       transition={{
         type: "timing",

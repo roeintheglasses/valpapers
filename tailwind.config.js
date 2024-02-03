@@ -22,6 +22,8 @@ module.exports = {
           800: "#222222",
           900: "#000000",
         },
+        main: "#1b2228",
+        highlight: { prime: "#ff4655", second: "#fec22d" },
       },
       borderRadius: {
         lg: `var(--radius)`,
@@ -29,13 +31,11 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        poppins: [
-          "Poppins",
-          "Poppins-Bold",
-          "Poppins-Light",
-          "Poppins-SemiBold",
-          "Poppins-Black",
-        ],
+        poppins: ["Poppins-Regular"],
+        poppinsBold: ["Poppins-Bold"],
+        poppinsLight: ["Poppins-Light"],
+        poppinsSemiBold: ["Poppins-SemiBold"],
+        poppinsBlack: ["Poppins-Black"],
         valo: ["Valo"],
       },
       backdropBlur: {
