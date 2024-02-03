@@ -33,7 +33,7 @@ function Home() {
         <View style={{ height: screenHeight / 2.8 }}>
           <PlayerCardWallpaperGrid />
         </View>
-        <View style={{ height: screenHeight / 2.6 }}>
+        <View style={{ height: screenHeight / 2.8 }}>
           <CommunityWallpaperGrid />
         </View>
       </ScrollView>

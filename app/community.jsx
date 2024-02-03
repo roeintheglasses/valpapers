@@ -9,15 +9,15 @@ const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 export default function CommunityValpapers() {
   return (
     <View className="flex-1 items-start justify-start bg-main px-2">
-      <Text
+      {/* <Text
         style={{ paddingHorizontal: 12, paddingBottom: 5 }}
         className="font-poppinsBold text-2xl text-slate-200"
       >
         Community Valpapers
-      </Text>
+      </Text> */}
       <View
         className="px-2"
-        style={{ height: screenHeight - 220, width: screenWidth }}
+        style={{ height: screenHeight - 150, width: screenWidth }}
       >
         <MasonryFlashList
           data={COMMUNITY_WALLPAPERS}

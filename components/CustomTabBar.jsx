@@ -5,13 +5,7 @@ import { MotiView, MotiText } from "moti";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 60,
-  },
+  container: { position: "absolute", bottom: 0, left: 0, right: 0, height: 60 },
   blurView: {
     flexDirection: "row",
   },
@@ -77,20 +71,17 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
 
   return (
     <View style={styles.container}>
-      <BlurView
-        tint="dark"
-        experimentalBlurMethod="dimezisBlurView"
-        intensity={100}
+      <MotiView
         style={styles.blurView}
-        className="flex-1 justify-between items-center px-4"
+        className="justify-between items-center px-4 bg-main"
       >
         {state.routes.map(renderTab)}
-      </BlurView>
+      </MotiView>
     </View>
   );
 }
 
-const TabIcon = ({ isFocused }) => (
+const TabIcon = ({ isFocused, label }) => (
   <MotiView
     animate={{
       backgroundColor: isFocused ? highLightColor : "transparent",
@@ -103,9 +94,16 @@ const TabIcon = ({ isFocused }) => (
     }}
     style={styles.motiView}
   >
-    <MCI name="cards-outline" size={22} color="#fff" />
+    {getTabIconFromLabel(label)}
   </MotiView>
 );
+
+function getTabIconFromLabel(label) {
+  if (label === "Home") return <MCI name="home" size={22} color="#fff" />;
+  else if (label === "Cards")
+    return <MCI name="cards-outline" size={22} color="#fff" />;
+  return <MCI name="google-circles-communities" size={22} color="#fff" />;
+}
 
 const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
   <TouchableOpacity
@@ -115,7 +113,7 @@ const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
     onLongPress={onLongPress}
     style={styles.tabButton}
   >
-    <TabIcon isFocused={isFocused} />
+    <TabIcon isFocused={isFocused} label={label} />
     <MotiText
       animate={{
         color: isFocused ? highLightColor : "#fff",
