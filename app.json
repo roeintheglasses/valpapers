@@ -12,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#cc3f3f"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -21,11 +23,23 @@
         "foregroundImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_foreground.png",
         "backgroundImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_background.png",
         "monochromeImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_monochrome.png"
-      }
+      },
+      "package": "com.roeintheglasses.valpapers"
     },
     "web": {
       "favicon": "./assets/icons/web/favicon.ico"
     },
-    "plugins": ["expo-router", "expo-font"]
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e7ae9743-a327-458f-a0d5-4e3b76dbd168"
+      }
+    }
   }
 }
