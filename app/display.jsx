@@ -1,18 +1,15 @@
 import React from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
 import { Image } from "expo-image";
-import getRandomBlurHash from "@lib/getRandomBlurHash";
 import { useLocalSearchParams } from "expo-router";
 import {
   GestureHandlerRootView,
-  Gesture,
   GestureDetector,
 } from "react-native-gesture-handler";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-} from "react-native-reanimated";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
+
 import usePinchGesture from "@hooks/usePinchGesture";
+import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -22,17 +19,26 @@ export default function Display() {
   const local = useLocalSearchParams();
   const { uri: imageUri } = local;
 
-  const { scale, pinchGesture } = usePinchGesture();
+  const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-  }));
+  const animatedStyle = useAnimatedStyle(() => {
+    const adjustX = focalX.value - screenWidth / 2;
+    const adjustY = focalY.value - screenHeight / 3 / 2; // Assuming the image takes up 1/3 of the screen height initially
+
+    return {
+      transform: [
+        { translateX: adjustX * (1 - scale.value) },
+        { translateY: adjustY * (1 - scale.value) },
+        { scale: scale.value },
+      ],
+    };
+  });
 
   return (
     <GestureHandlerRootView style={styles.flexContainer}>
       <View style={styles.container} className="bg-main">
         <GestureDetector gesture={pinchGesture}>
-          <Animated.View style={[styles.centerContent, animatedStyle]}>
+          <Animated.View style={[animatedStyle]}>
             <Image
               source={{ uri: imageUri }}
               style={styles.image}
@@ -53,16 +59,11 @@ const styles = StyleSheet.create({
   container: {
     height: screenHeight - 160,
     width: screenWidth,
-    alignItems: "start",
-    justifyContent: "center",
-  },
-  centerContent: {
     alignItems: "center",
     justifyContent: "center",
   },
   image: {
     height: screenHeight / 3,
-    width: "100%",
-    borderRadius: 10,
+    width: screenWidth,
   },
 });
