@@ -53,6 +53,7 @@ function CommunityWallpaperItem({ item, index }) {
           borderRadius: 10,
         }}
         placeholder={wallpaperBlurHash}
+        recyclingKey={`${item.id + index.toString()}-communityWallpaper`}
       />
     </TouchableOpacity>
   );

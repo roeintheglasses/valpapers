@@ -129,6 +129,7 @@ function CommunityWallpaperItem({ item, index }) {
           padding: 10,
         }}
         placeholder={communityWallpaperBlurHash}
+        recyclingKey={`${index}-${item.id}-CommunityWallpaper`}
       />
     </TouchableOpacity>
   );
@@ -180,6 +181,7 @@ function PlayerCardItem({ item, index }) {
           padding: 10,
         }}
         placeholder={playerCardBlurHash}
+        recyclingKey={`${index}-${item.id}-PlayerCard`}
       />
     </TouchableOpacity>
   );
