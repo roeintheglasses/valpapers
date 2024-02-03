@@ -9,7 +9,7 @@ import Header from "@components/Header";
 import MyTabBar from "@components/CustomTabBar";
 
 // Import global styles
-import "../global.native.css";
+import "../global.css";
 
 // Preloading fonts and preventing auto-hide of the splash screen
 SplashScreen.preventAutoHideAsync();
