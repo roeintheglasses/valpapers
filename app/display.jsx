@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    height: screenHeight / 3,
+    height: "100%",
     width: screenWidth,
   },
 });

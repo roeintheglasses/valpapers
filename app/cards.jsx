@@ -1,15 +1,17 @@
 import { View, Dimensions, TouchableOpacity, Text } from "react-native";
 import { useState, useEffect } from "react";
 import { MasonryFlashList } from "@shopify/flash-list";
-import { PLAYER_CARDS } from "../data/assetList.json";
 import { Image } from "expo-image";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
+import { Link } from "expo-router";
+
+import { CDN_URL } from "../data/constants.json";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
 import usePlayerCards from "@hooks/usePlayerCards";
 
-export default function CommunityValpapers() {
+export default function PlayerCardWallpaers() {
   const { data, isLoading, isError, isSuccess } = usePlayerCards();
   const [playerCards, setPlayerCards] = useState([]);
   const [isDataSet, setIsDataSet] = useState(false);
@@ -53,25 +55,33 @@ export default function CommunityValpapers() {
 function PlayerCardItem({ item, index }) {
   const wallpaperBlurHash = getRandomBlurHash();
   return (
-    <TouchableOpacity
-      style={{
-        height: screenHeight / 3.5,
-        borderRadius: 10,
-        aspectRatio: "9/21",
-        alignItems: "center",
-        paddingVertical: 6,
+    <Link
+      href={{
+        pathname: "/display",
+        params: { item, uri: `${CDN_URL}/playerCards/${item.uuid}.png` },
       }}
+      asChild
     >
-      <Image
-        source={{ uri: item.largeArt }}
+      <TouchableOpacity
         style={{
-          height: "100%",
-          width: "100%",
+          height: screenHeight / 3.5,
           borderRadius: 10,
+          aspectRatio: "9/21",
+          alignItems: "center",
+          paddingVertical: 6,
         }}
-        placeholder={wallpaperBlurHash}
-        recyclingKey={`${item.uuid + index.toString()}-playerCard`}
-      />
-    </TouchableOpacity>
+      >
+        <Image
+          source={{ uri: item.largeArt }}
+          style={{
+            height: "100%",
+            width: "100%",
+            borderRadius: 10,
+          }}
+          placeholder={wallpaperBlurHash}
+          recyclingKey={`${item.uuid + index.toString()}-playerCard`}
+        />
+      </TouchableOpacity>
+    </Link>
   );
 }
