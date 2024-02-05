@@ -44,6 +44,7 @@ export default function Display() {
               style={styles.image}
               placeholder={wallpaperBlurHash}
               contentFit="contain"
+              recyclingKey={`display-image-${imageUri}`}
             />
           </Animated.View>
         </GestureDetector>

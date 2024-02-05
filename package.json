@@ -22,6 +22,7 @@
     "expo": "50.0.5",
     "expo-blur": "~12.9.1",
     "expo-constants": "~15.4.5",
+    "expo-file-system": "~16.0.5",
     "expo-font": "~11.10.2",
     "expo-image": "~1.10.5",
     "expo-linking": "~6.2.2",

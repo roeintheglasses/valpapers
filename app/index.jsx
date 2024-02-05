@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,10 +13,14 @@ import {
   COMMUNITY_WALLPAPERS,
   PLAYER_CARDS,
 } from "@data/assetList.json";
+
+import { CDN_URL } from "@data/constants.json";
+
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 import usePlayerCards from "@hooks/usePlayerCards";
+import { Link } from "expo-router";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -67,7 +71,7 @@ function WallpaperCard({ item, index }) {
     <Link
       href={{
         pathname: "/display",
-        params: { item, uri: `${CDN_URL}/playerCards/${item.uuid}.png` },
+        params: { item, uri: item.uri },
       }}
       asChild
     >
@@ -160,13 +164,13 @@ function PlayerCardWallpaperGrid() {
 
   useEffect(() => {
     if (isSuccess && Array.isArray(data) && !isDataSet) {
-      setPlayerCards(data);
+      let playerCardsWalls = getRandomWallpapers(data, 20);
+      setPlayerCards(playerCardsWalls);
       setIsDataSet(true);
     }
-    return () => setPlayerCards([]);
   }, [isSuccess, data]);
 
-  if (isLoading) {
+  if (isLoading || playerCards.length < 1) {
     return (
       <View className="flex-1 items-start justify-start bg-main px-2">
         <Text>Loading...</Text>
@@ -183,7 +187,7 @@ function PlayerCardWallpaperGrid() {
         Player Cards
       </Text>
       <FlashList
-        data={getRandomWallpapers(playerCards, 20)}
+        data={playerCards}
         keyExtractor={function keyExtractor(item, index) {
           return `${index}-${item.id}-FlashList-PlayerCards`;
         }}
@@ -201,26 +205,34 @@ function PlayerCardWallpaperGrid() {
 function PlayerCardItem({ item, index }) {
   const playerCardBlurHash = getRandomBlurHash();
   return (
-    <TouchableOpacity
-      style={{
-        width: screenWidth / 3,
-        paddingRight: 20,
-        aspectRatio: "9/16",
+    <Link
+      href={{
+        pathname: "/display",
+        params: { item, uri: `${CDN_URL}/playerCards/${item.uuid}.png` },
       }}
+      asChild
     >
-      <Image
-        source={{ uri: item.uri }}
+      <TouchableOpacity
         style={{
-          height: "100%",
-          width: "100%",
-          marginVertical: 10,
-          borderRadius: 10,
-          padding: 10,
+          width: screenWidth / 3,
+          paddingRight: 20,
+          aspectRatio: "9/16",
         }}
-        placeholder={playerCardBlurHash}
-        recyclingKey={`${index}-${item.id}-PlayerCard`}
-      />
-    </TouchableOpacity>
+      >
+        <Image
+          source={{ uri: item.largeArt }}
+          style={{
+            height: "100%",
+            width: "100%",
+            marginVertical: 10,
+            borderRadius: 10,
+            padding: 10,
+          }}
+          placeholder={playerCardBlurHash}
+          recyclingKey={`${index}-${item.id}-PlayerCard`}
+        />
+      </TouchableOpacity>
+    </Link>
   );
 }
 
