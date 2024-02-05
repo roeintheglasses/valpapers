@@ -71,7 +71,7 @@ function WallpaperCard({ item, index }) {
     <Link
       href={{
         pathname: "/display",
-        params: { item, uri: item.uri },
+        params: { item: JSON.stringify(item), uri: item.uri },
       }}
       asChild
     >
@@ -128,7 +128,7 @@ function CommunityWallpaperItem({ item, index }) {
     <Link
       href={{
         pathname: "/display",
-        params: { item, uri: item.uri },
+        params: { item: JSON.stringify(item), uri: item.uri },
       }}
       asChild
     >
@@ -208,7 +208,10 @@ function PlayerCardItem({ item, index }) {
     <Link
       href={{
         pathname: "/display",
-        params: { item, uri: `${CDN_URL}/playerCards/${item.uuid}.png` },
+        params: {
+          item: JSON.stringify(item),
+          uri: `${CDN_URL}/playerCards/${item.uuid}.png`,
+        },
       }}
       asChild
     >

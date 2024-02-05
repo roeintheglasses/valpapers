@@ -42,7 +42,7 @@ function CommunityWallpaperItem({ item, index }) {
     <Link
       href={{
         pathname: "/display",
-        params: { item, uri: item.uri },
+        params: { item: JSON.stringify(item), uri: item.uri },
       }}
       asChild
     >

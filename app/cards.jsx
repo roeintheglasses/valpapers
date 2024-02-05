@@ -58,7 +58,10 @@ function PlayerCardItem({ item, index }) {
     <Link
       href={{
         pathname: "/display",
-        params: { item, uri: `${CDN_URL}/playerCards/${item.uuid}.png` },
+        params: {
+          item: JSON.stringify(item),
+          uri: `${CDN_URL}/playerCards/${item.uuid}.png`,
+        },
       }}
       asChild
     >

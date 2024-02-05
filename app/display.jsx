@@ -1,8 +1,7 @@
 import * as FileSystem from "expo-file-system";
-import * as Permissions from "expo-permissions";
 import * as MediaLibrary from "expo-media-library";
 
-import { View, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions, StyleSheet, Button } from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import {
@@ -20,13 +19,16 @@ export default function Display() {
   const wallpaperBlurHash = getRandomBlurHash();
 
   const local = useLocalSearchParams();
-  const { uri: imageUri } = local;
+  const { uri: imageUri, item } = local;
+  const itemData = JSON.parse(item);
+  const fileName =
+    itemData && itemData.uuid ? `${itemData.uuid}.png` : itemData.id;
 
   const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
 
   const animatedStyle = useAnimatedStyle(() => {
     const adjustX = focalX.value - screenWidth / 2;
-    const adjustY = focalY.value - screenHeight / 3 / 2; // Assuming the image takes up 1/3 of the screen height initially
+    const adjustY = focalY.value - screenHeight / 3; // Assuming the image takes up 1/3 of the screen height initially
 
     return {
       transform: [
@@ -39,23 +41,35 @@ export default function Display() {
 
   return (
     <GestureHandlerRootView style={styles.flexContainer}>
-      <View style={styles.container} className="bg-main">
-        <GestureDetector gesture={pinchGesture}>
-          <Animated.View style={[animatedStyle]}>
-            <Image
-              source={{ uri: imageUri }}
-              style={styles.image}
-              placeholder={wallpaperBlurHash}
-              contentFit="contain"
-              recyclingKey={`display-image-${imageUri}`}
-            />
-          </Animated.View>
-        </GestureDetector>
+      <View className="flex-1 justify-start items-center bg-main">
+        <View style={styles.container}>
+          <GestureDetector gesture={pinchGesture}>
+            <Animated.View style={[animatedStyle]}>
+              <Image
+                source={{ uri: imageUri }}
+                style={styles.image}
+                placeholder={wallpaperBlurHash}
+                contentFit="contain"
+                recyclingKey={`display-image-${imageUri}`}
+              />
+            </Animated.View>
+          </GestureDetector>
+        </View>
+        <Button
+          title="Save"
+          style={styles.button}
+          onPress={() => {
+            DownloadImage(fileName, imageUri);
+          }}
+        />
       </View>
     </GestureHandlerRootView>
   );
 }
 async function DownloadImage(fileName, imageUri) {
+  console.log("====================================");
+  console.log(fileName);
+  console.log("====================================");
   let fileUri = FileSystem.documentDirectory + fileName;
   try {
     const res = await FileSystem.downloadAsync(imageUri, fileUri);
@@ -66,7 +80,10 @@ async function DownloadImage(fileName, imageUri) {
 }
 
 async function SaveFileToGallery(fileUri) {
-  const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+  const { status } = await MediaLibrary.requestPermissionsAsync();
+  console.log("====================================");
+  console.log(fileUri);
+  console.log("====================================");
   if (status === "granted") {
     try {
       const asset = await MediaLibrary.createAssetAsync(fileUri);
@@ -88,8 +105,13 @@ const styles = StyleSheet.create({
   flexContainer: {
     flex: 1,
   },
+  button: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    width: 50,
+  },
   container: {
-    height: screenHeight - 160,
+    height: "80%",
     width: screenWidth,
     alignItems: "center",
     justifyContent: "center",
