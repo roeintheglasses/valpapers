@@ -1,4 +1,7 @@
-import React from "react";
+import * as FileSystem from "expo-file-system";
+import * as Permissions from "expo-permissions";
+import * as MediaLibrary from "expo-media-library";
+
 import { View, Dimensions, StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
@@ -51,6 +54,34 @@ export default function Display() {
       </View>
     </GestureHandlerRootView>
   );
+}
+async function DownloadImage(fileName, imageUri) {
+  let fileUri = FileSystem.documentDirectory + fileName;
+  try {
+    const res = await FileSystem.downloadAsync(imageUri, fileUri);
+    SaveFileToGallery(res.uri);
+  } catch (err) {
+    console.log("FS Err: ", err);
+  }
+}
+
+async function SaveFileToGallery(fileUri) {
+  const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+  if (status === "granted") {
+    try {
+      const asset = await MediaLibrary.createAssetAsync(fileUri);
+      const album = await MediaLibrary.getAlbumAsync("Valpapers");
+      if (album === null) {
+        await MediaLibrary.createAlbumAsync("Valpapers", asset, false);
+      } else {
+        await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+      }
+    } catch (err) {
+      console.log("Save err: ", err);
+    }
+  } else if (status === "denied") {
+    alert("please allow permissions to download");
+  }
 }
 
 const styles = StyleSheet.create({
