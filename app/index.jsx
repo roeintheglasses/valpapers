@@ -16,6 +16,7 @@ import {
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
+import usePlayerCards from "@hooks/usePlayerCards";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -63,23 +64,31 @@ function WallpaperCarousel() {
 
 function WallpaperCard({ item, index }) {
   return (
-    <TouchableOpacity
-      style={{
-        width: screenWidth,
-        paddingHorizontal: 5,
-        aspectRatio: "16/9",
+    <Link
+      href={{
+        pathname: "/display",
+        params: { item, uri: `${CDN_URL}/playerCards/${item.uuid}.png` },
       }}
+      asChild
     >
-      <ImageBackground
-        source={{ uri: item.uri }}
-        className="flex-1 justify-center items-center bg-gray-900 rounded-2xl"
-        imageStyle={{ borderRadius: 10, opacity: 0.55 }}
+      <TouchableOpacity
+        style={{
+          width: screenWidth,
+          paddingHorizontal: 5,
+          aspectRatio: "16/9",
+        }}
       >
-        <Text className="text-white text-center font-poppinsBold text-4xl">
-          {index === 0 ? "Val of the day" : getIntroText()}
-        </Text>
-      </ImageBackground>
-    </TouchableOpacity>
+        <ImageBackground
+          source={{ uri: item.uri }}
+          className="flex-1 justify-center items-center bg-gray-900 rounded-2xl"
+          imageStyle={{ borderRadius: 10, opacity: 0.55 }}
+        >
+          <Text className="text-white text-center font-poppinsBold text-4xl">
+            {index === 0 ? "Val of the day" : getIntroText()}
+          </Text>
+        </ImageBackground>
+      </TouchableOpacity>
+    </Link>
   );
 }
 
@@ -112,31 +121,59 @@ function CommunityWallpaperItem({ item, index }) {
   const communityWallpaperBlurHash = getRandomBlurHash();
 
   return (
-    <TouchableOpacity
-      style={{
-        width: screenWidth / 1.5,
-        paddingRight: 20,
-        aspectRatio: "16/9",
+    <Link
+      href={{
+        pathname: "/display",
+        params: { item, uri: item.uri },
       }}
+      asChild
     >
-      <Image
-        source={{ uri: item.uri }}
+      <TouchableOpacity
         style={{
-          height: "100%",
-          width: "100%",
-          marginVertical: 10,
-          borderRadius: 10,
-          padding: 10,
+          width: screenWidth / 1.5,
+          paddingRight: 20,
+          aspectRatio: "16/9",
         }}
-        placeholder={communityWallpaperBlurHash}
-        recyclingKey={`${index}-${item.id}-CommunityWallpaper`}
-      />
-    </TouchableOpacity>
+      >
+        <Image
+          source={{ uri: item.uri }}
+          style={{
+            height: "100%",
+            width: "100%",
+            marginVertical: 10,
+            borderRadius: 10,
+            padding: 10,
+          }}
+          placeholder={communityWallpaperBlurHash}
+          recyclingKey={`${index}-${item.id}-CommunityWallpaper`}
+        />
+      </TouchableOpacity>
+    </Link>
   );
 }
 
 // Player Cards Wallpapers Components
 function PlayerCardWallpaperGrid() {
+  const { data, isLoading, isError, isSuccess } = usePlayerCards();
+  const [playerCards, setPlayerCards] = useState([]);
+  const [isDataSet, setIsDataSet] = useState(false);
+
+  useEffect(() => {
+    if (isSuccess && Array.isArray(data) && !isDataSet) {
+      setPlayerCards(data);
+      setIsDataSet(true);
+    }
+    return () => setPlayerCards([]);
+  }, [isSuccess, data]);
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-start justify-start bg-main px-2">
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <>
       <Text
@@ -146,7 +183,7 @@ function PlayerCardWallpaperGrid() {
         Player Cards
       </Text>
       <FlashList
-        data={getRandomWallpapers(PLAYER_CARDS, 20)}
+        data={getRandomWallpapers(playerCards, 20)}
         keyExtractor={function keyExtractor(item, index) {
           return `${index}-${item.id}-FlashList-PlayerCards`;
         }}
