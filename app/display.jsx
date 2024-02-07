@@ -1,7 +1,7 @@
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 
-import { View, Dimensions, StyleSheet, Button } from "react-native";
+import { View, Dimensions, StyleSheet, Pressable, Text } from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import {
@@ -10,7 +10,7 @@ import {
 } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 
-import usePinchGesture from "@hooks/usePinchGesture";
+import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
@@ -25,6 +25,14 @@ export default function Display() {
     itemData && itemData.uuid ? `${itemData.uuid}.png` : itemData.id;
 
   const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
+  const { tapGesture, tapOpacity, tapScale } = useTapGesture();
+
+  const animatedSaveStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: tapScale.value }],
+      opacity: tapOpacity.value,
+    };
+  });
 
   const animatedStyle = useAnimatedStyle(() => {
     const adjustX = focalX.value - screenWidth / 2;
@@ -39,12 +47,14 @@ export default function Display() {
     };
   });
 
+  const onSavePress = () => DownloadImage(fileName, imageUri);
+
   return (
     <GestureHandlerRootView style={styles.flexContainer}>
       <View className="flex-1 justify-start items-center bg-main">
         <View style={styles.container}>
           <GestureDetector gesture={pinchGesture}>
-            <Animated.View style={[animatedStyle]}>
+            <Animated.View style={animatedStyle}>
               <Image
                 source={{ uri: imageUri }}
                 style={styles.image}
@@ -55,17 +65,18 @@ export default function Display() {
             </Animated.View>
           </GestureDetector>
         </View>
-        <Button
-          title="Save"
-          style={styles.button}
-          onPress={() => {
-            DownloadImage(fileName, imageUri);
-          }}
-        />
+        <GestureDetector gesture={tapGesture}>
+          <Pressable onPress={onSavePress}>
+            <Animated.View style={[styles.button, animatedSaveStyles]}>
+              <Text>Save</Text>
+            </Animated.View>
+          </Pressable>
+        </GestureDetector>
       </View>
     </GestureHandlerRootView>
   );
 }
+
 async function DownloadImage(fileName, imageUri) {
   console.log("====================================");
   console.log(fileName);
@@ -89,9 +100,9 @@ async function SaveFileToGallery(fileUri) {
       const asset = await MediaLibrary.createAssetAsync(fileUri);
       const album = await MediaLibrary.getAlbumAsync("Valpapers");
       if (album === null) {
-        await MediaLibrary.createAlbumAsync("Valpapers", asset, false);
+        await MediaLibrary.createAlbumAsync("Valpapers", asset, true);
       } else {
-        await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+        await MediaLibrary.addAssetsToAlbumAsync([asset], album, true);
       }
     } catch (err) {
       console.log("Save err: ", err);
@@ -106,9 +117,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    width: 50,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    width: 100,
+    backgroundColor: "#DDDDDD", // Add this for a gray background
+    alignItems: "center", // Add this to center the text horizontally
+    justifyContent: "center",
   },
   container: {
     height: "80%",
