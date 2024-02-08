@@ -78,9 +78,6 @@ export default function Display() {
 }
 
 async function DownloadImage(fileName, imageUri) {
-  console.log("====================================");
-  console.log(fileName);
-  console.log("====================================");
   let fileUri = FileSystem.documentDirectory + fileName;
   try {
     const res = await FileSystem.downloadAsync(imageUri, fileUri);
@@ -92,9 +89,6 @@ async function DownloadImage(fileName, imageUri) {
 
 async function SaveFileToGallery(fileUri) {
   const { status } = await MediaLibrary.requestPermissionsAsync();
-  console.log("====================================");
-  console.log(fileUri);
-  console.log("====================================");
   if (status === "granted") {
     try {
       const asset = await MediaLibrary.createAssetAsync(fileUri);
