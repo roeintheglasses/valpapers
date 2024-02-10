@@ -23,6 +23,8 @@ export default function Display() {
   const itemData = JSON.parse(item);
   const fileName =
     itemData && itemData.uuid ? `${itemData.uuid}.png` : itemData.id;
+  const wallpaperHeightBasedOnTypeType =
+    itemData && itemData.uuid ? "80%" : "50%";
 
   const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
   const { tapGesture, tapOpacity, tapScale } = useTapGesture();
@@ -51,26 +53,51 @@ export default function Display() {
 
   return (
     <GestureHandlerRootView style={styles.flexContainer}>
-      <View className="flex-1 justify-start items-center bg-main">
-        <View style={styles.container}>
-          <GestureDetector gesture={pinchGesture}>
-            <Animated.View style={animatedStyle}>
-              <Image
-                source={{ uri: imageUri }}
-                style={styles.image}
-                placeholder={wallpaperBlurHash}
-                contentFit="contain"
-                recyclingKey={`display-image-${imageUri}`}
-              />
-            </Animated.View>
-          </GestureDetector>
-        </View>
+      <View className="flex-1 justify-center items-center bg-main">
+        <GestureDetector gesture={pinchGesture}>
+          <Animated.View
+            style={[
+              animatedStyle,
+              styles.container,
+              { height: wallpaperHeightBasedOnTypeType },
+            ]}
+          >
+            <Image
+              source={{ uri: imageUri }}
+              style={styles.image}
+              placeholder={wallpaperBlurHash}
+              contentFit="contain"
+              recyclingKey={`display-image-${imageUri}`}
+            />
+          </Animated.View>
+        </GestureDetector>
+
         <GestureDetector gesture={tapGesture}>
-          <Pressable onPress={onSavePress}>
-            <Animated.View style={[styles.button, animatedSaveStyles]}>
-              <Text>Save</Text>
-            </Animated.View>
-          </Pressable>
+          <View
+            style={{ flexDirection: "row" }}
+            className="justify-evenly items-center w-full"
+          >
+            <Pressable onPress={() => console.log("Pinch")}>
+              <Animated.View
+                className="bg-highlight-prime px-8 py-2 rounded-xl"
+                style={[styles.button, animatedSaveStyles]}
+              >
+                <Text className="text-white font-poppinsBold text-l">
+                  Set Wallpaper
+                </Text>
+              </Animated.View>
+            </Pressable>
+            <Pressable onPress={onSavePress}>
+              <Animated.View
+                className="bg-highlight-prime px-8 py-2 rounded-xl"
+                style={[styles.button, animatedSaveStyles]}
+              >
+                <Text className="text-white font-poppinsBold text-l">
+                  Download
+                </Text>
+              </Animated.View>
+            </Pressable>
+          </View>
         </GestureDetector>
       </View>
     </GestureHandlerRootView>
@@ -111,18 +138,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    width: 100,
-    backgroundColor: "#DDDDDD", // Add this for a gray background
     alignItems: "center", // Add this to center the text horizontally
     justifyContent: "center",
   },
   container: {
-    height: "80%",
     width: screenWidth,
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 40,
   },
   image: {
     height: "100%",
