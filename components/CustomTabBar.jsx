@@ -1,9 +1,9 @@
-import { View, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
-import { BlurView } from "expo-blur";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
+// import { BlurView } from "expo-blur";
 import MCI from "@expo/vector-icons/MaterialCommunityIcons";
 import { MotiView, MotiText } from "moti";
+import { usePathname } from "expo-router";
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 const styles = StyleSheet.create({
   container: { position: "absolute", bottom: 0, left: 0, right: 0, height: 70 },
   blurView: {
@@ -29,17 +29,12 @@ const styles = StyleSheet.create({
 });
 const highLightColor = "#ff4655";
 
-export default function CustomTabBar({ state, descriptors, navigation }) {
+export default function CustomTabBar({ state, descriptors, navigation, path }) {
   const renderTab = (route, index) => {
     const { options } = descriptors[route.key];
     const label = options.tabBarLabel ?? options.title ?? route.name;
 
-    if (
-      ["Not Found", "sitemap", "Favorites", "+not-found", "Display"].includes(
-        label
-      )
-    )
-      return null;
+    if (!shouldRenderCurrentTab(label)) return null;
 
     const isFocused = state.index === index;
 
@@ -73,6 +68,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
     );
   };
 
+  if (!shouldTabBar(path)) return null;
   return (
     <View style={styles.container}>
       <MotiView
@@ -85,52 +81,70 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
   );
 }
 
-const TabIcon = ({ isFocused, label }) => (
-  <MotiView
-    animate={{
-      backgroundColor: isFocused ? highLightColor : "transparent",
-      paddingHorizontal: isFocused ? 15 : 0,
-      scale: isFocused ? 1.1 : 1,
-    }}
-    transition={{
-      type: "timing",
-      duration: 200,
-    }}
-    style={styles.motiView}
-  >
-    {getTabIconFromLabel(label)}
-  </MotiView>
-);
+function TabIcon({ isFocused, label }) {
+  return (
+    <MotiView
+      animate={{
+        backgroundColor: isFocused ? highLightColor : "transparent",
+        paddingHorizontal: isFocused ? 15 : 0,
+        scale: isFocused ? 1.1 : 1,
+      }}
+      transition={{
+        type: "timing",
+        duration: 200,
+      }}
+      style={styles.motiView}
+    >
+      {getTabIconFromLabel(label)}
+    </MotiView>
+  );
+}
+function TabButton({ isFocused, label, onPress, onLongPress }) {
+  return (
+    <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityState={isFocused ? { selected: true } : {}}
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={styles.tabButton}
+    >
+      <TabIcon isFocused={isFocused} label={label} />
+      <MotiText
+        animate={{
+          color: isFocused ? highLightColor : "#fff",
+          scale: isFocused ? 1.1 : 1,
+          paddingTop: isFocused ? 2 : 0,
+        }}
+        transition={{
+          type: "timing",
+          duration: 200,
+        }}
+        style={styles.labelText}
+      >
+        {label}
+      </MotiText>
+    </TouchableOpacity>
+  );
+}
 
+// Utility Functions
 function getTabIconFromLabel(label) {
   if (label === "Home") return <MCI name="home" size={22} color="#fff" />;
   else if (label === "Cards")
     return <MCI name="cards-outline" size={22} color="#fff" />;
   return <MCI name="google-circles-communities" size={22} color="#fff" />;
 }
+function shouldRenderCurrentTab(label) {
+  if (
+    ["Not Found", "sitemap", "Favorites", "+not-found", "Display"].includes(
+      label
+    )
+  )
+    return false;
+  return true;
+}
 
-const TabButton = ({ isFocused, label, onPress, onLongPress }) => (
-  <TouchableOpacity
-    accessibilityRole="button"
-    accessibilityState={isFocused ? { selected: true } : {}}
-    onPress={onPress}
-    onLongPress={onLongPress}
-    style={styles.tabButton}
-  >
-    <TabIcon isFocused={isFocused} label={label} />
-    <MotiText
-      animate={{
-        color: isFocused ? highLightColor : "#fff",
-        scale: isFocused ? 1.1 : 1,
-        paddingTop: isFocused ? 2 : 0,
-      }}
-      transition={{
-        type: "timing",
-        duration: 200,
-      }}
-      style={styles.labelText}
-    >
-      {label}
-    </MotiText>
-  </TouchableOpacity>
-);
+function shouldTabBar(currentPath) {
+  if (["/display"].includes(currentPath)) return false;
+  return true;
+}

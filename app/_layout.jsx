@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Tabs, Stack } from "expo-router";
+import { Tabs, Stack, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 
@@ -30,6 +30,7 @@ import "../global.css";
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
+  const pathName = usePathname();
   const [fontsLoaded] = useFonts({
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -69,7 +70,7 @@ export default function Layout() {
           <Tabs
             initialRouteName="index"
             screenOptions={{ headerShown: false }}
-            tabBar={MyTabBar}
+            tabBar={(props) => <MyTabBar {...props} path={pathName} />}
           >
             <Tabs.Screen
               name="community"
