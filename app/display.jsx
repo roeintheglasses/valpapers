@@ -1,9 +1,17 @@
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
-
-import { View, Dimensions, StyleSheet, Pressable, Text } from "react-native";
+import { useState, useCallback } from "react";
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  Pressable,
+  Text,
+  ToastAndroid,
+} from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
+import { Dialog } from "@rneui/themed";
 import {
   GestureHandlerRootView,
   GestureDetector,
@@ -13,14 +21,22 @@ import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
+// import { setWallpaper, hello } from "../modules/expo-wallpaper";
+
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
 export default function Display() {
+  const [visible, setVisible] = useState(false);
+  const toggleAlert = useCallback(() => {
+    setVisible(!visible);
+  }, [visible]);
+
   const wallpaperBlurHash = getRandomBlurHash();
 
   const local = useLocalSearchParams();
   const { uri: imageUri, item } = local;
   const itemData = JSON.parse(item);
+
   const fileName =
     itemData && itemData.uuid ? `${itemData.uuid}.png` : itemData.id;
   const wallpaperHeightBasedOnTypeType =
@@ -51,9 +67,35 @@ export default function Display() {
 
   const onSavePress = () => DownloadImage(fileName, imageUri);
 
+  const onSetWallpaperPress = (type) => {
+    hello();
+  };
+
   return (
     <GestureHandlerRootView style={styles.flexContainer}>
       <View className="flex-1 justify-center items-center bg-main">
+        <Dialog isVisible={visible} onBackdropPress={toggleAlert}>
+          <Dialog.Title title="Set Wallpaper" />
+          <Dialog.Actions>
+            <Dialog.Button
+              title="Set Homescreen Wallpaper"
+              type="solid"
+              containerStyle={{ width: "100%" }}
+              onPress={() => onSetWallpaperPress(TYPE.HOME)}
+            />
+            <Dialog.Button
+              title="Set Lockscreen Wallpaper"
+              containerStyle={{ width: "100%" }}
+              onPress={() => onSetWallpaperPress(TYPE.LOCK)}
+            />
+            <Dialog.Button
+              title="Set Both"
+              containerStyle={{ width: "100%" }}
+              onPress={() => onSetWallpaperPress(TYPE.BOTH)}
+            />
+          </Dialog.Actions>
+        </Dialog>
+
         <GestureDetector gesture={pinchGesture}>
           <Animated.View
             style={[
@@ -77,7 +119,7 @@ export default function Display() {
             style={{ flexDirection: "row" }}
             className="justify-evenly items-center w-full"
           >
-            <Pressable onPress={() => console.log("Pinch")}>
+            <Pressable onPress={toggleAlert}>
               <Animated.View
                 className="bg-highlight-prime px-8 py-2 rounded-xl"
                 style={[styles.button, animatedSaveStyles]}
@@ -133,6 +175,10 @@ async function SaveFileToGallery(fileUri) {
   }
 }
 
+function showToast() {
+  ToastAndroid.show("Wallpaper Updated", ToastAndroid.SHORT);
+}
+
 const styles = StyleSheet.create({
   flexContainer: {
     flex: 1,
@@ -150,5 +196,47 @@ const styles = StyleSheet.create({
   image: {
     height: "100%",
     width: screenWidth,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
