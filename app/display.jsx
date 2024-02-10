@@ -22,6 +22,7 @@ import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 // import { setWallpaper, hello } from "../modules/expo-wallpaper";
+import { hello } from "../modules/my-module";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -69,6 +70,7 @@ export default function Display() {
 
   const onSetWallpaperPress = (type) => {
     hello();
+    console.log("hello");
   };
 
   return (
@@ -81,17 +83,17 @@ export default function Display() {
               title="Set Homescreen Wallpaper"
               type="solid"
               containerStyle={{ width: "100%" }}
-              onPress={() => onSetWallpaperPress(TYPE.HOME)}
+              onPress={() => onSetWallpaperPress()}
             />
             <Dialog.Button
               title="Set Lockscreen Wallpaper"
               containerStyle={{ width: "100%" }}
-              onPress={() => onSetWallpaperPress(TYPE.LOCK)}
+              onPress={() => onSetWallpaperPress()}
             />
             <Dialog.Button
               title="Set Both"
               containerStyle={{ width: "100%" }}
-              onPress={() => onSetWallpaperPress(TYPE.BOTH)}
+              onPress={() => onSetWallpaperPress()}
             />
           </Dialog.Actions>
         </Dialog>
