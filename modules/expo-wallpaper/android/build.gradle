@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
-group = 'expo.modules.mymodule'
+group = 'expo.modules.wallpaper'
 version = '0.4.2'
 
 buildscript {
@@ -65,7 +65,7 @@ android {
     }
   }
 
-  namespace "expo.modules.mymodule"
+  namespace "expo.modules.wallpaper"
   defaultConfig {
     minSdkVersion safeExtGet("minSdkVersion", 21)
     targetSdkVersion safeExtGet("targetSdkVersion", 34)

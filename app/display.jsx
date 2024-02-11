@@ -22,7 +22,7 @@ import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
 // import { setWallpaper, hello } from "../modules/expo-wallpaper";
-import { hello } from "../modules/my-module";
+import { hello, setWallpaper } from "../modules/expo-wallpaper";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -68,9 +68,16 @@ export default function Display() {
 
   const onSavePress = () => DownloadImage(fileName, imageUri);
 
-  const onSetWallpaperPress = (type) => {
-    hello();
-    console.log("hello");
+  const onSetWallpaperPress = async (type) => {
+    let fileUri = FileSystem.documentDirectory + fileName;
+    try {
+      const res = await FileSystem.downloadAsync(imageUri, fileUri);
+      const result = setWallpaper(res);
+      console.log(result);
+    } catch (err) {
+      console.log("FS Err: ", err);
+    }
+    // console.log("hello");
   };
 
   return (

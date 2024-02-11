@@ -2,6 +2,6 @@ export type ChangeEventPayload = {
   value: string;
 };
 
-export type MyModuleViewProps = {
+export type ExpoWallpaperViewProps = {
   name: string;
 };
