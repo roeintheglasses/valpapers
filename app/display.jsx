@@ -72,7 +72,8 @@ export default function Display() {
     let fileUri = FileSystem.documentDirectory + fileName;
     try {
       const res = await FileSystem.downloadAsync(imageUri, fileUri);
-      const result = setWallpaper(res);
+      const options = { uri: res.uri, type };
+      const result = setWallpaper(options);
       console.log(result);
     } catch (err) {
       console.log("FS Err: ", err);
@@ -90,17 +91,17 @@ export default function Display() {
               title="Set Homescreen Wallpaper"
               type="solid"
               containerStyle={{ width: "100%" }}
-              onPress={() => onSetWallpaperPress()}
+              onPress={() => onSetWallpaperPress("screen")}
             />
             <Dialog.Button
               title="Set Lockscreen Wallpaper"
               containerStyle={{ width: "100%" }}
-              onPress={() => onSetWallpaperPress()}
+              onPress={() => onSetWallpaperPress("lock")}
             />
             <Dialog.Button
               title="Set Both"
               containerStyle={{ width: "100%" }}
-              onPress={() => onSetWallpaperPress()}
+              onPress={() => onSetWallpaperPress("both")}
             />
           </Dialog.Actions>
         </Dialog>

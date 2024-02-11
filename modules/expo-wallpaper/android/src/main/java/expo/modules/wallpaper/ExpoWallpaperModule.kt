@@ -20,14 +20,32 @@ class ExpoWallpaperModule : Module() {
     Function("setWallpaper") { options: Map<String, Any> ->
       try {
         val uri = options["uri"] as? String
-        if (uri == null) {
-         return@Function "uri Null"
+        val type = options["type"] as? String
+
+        if (uri == null || type == null ) {
+         return@Function "data null"
         }
+
+        if (type != "lock" && type != "screen" && type != "both") {
+         return@Function "invalid type"
+        }
+
         val context: Context = context
         val wallpaperManager = WallpaperManager.getInstance(context)
         val inputStream = context.contentResolver.openInputStream(Uri.parse(uri))
         val bitmap = BitmapFactory.decodeStream(inputStream)
-        wallpaperManager.setBitmap(bitmap)
+
+        if (type == "screen" ) {
+          wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+        }
+        if (type == "lock" ) {
+          wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+        }
+        if (type == "both" ) {
+          wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+          wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+        }
+
         return@Function  "success"
       } catch (e: Exception) {
         e.printStackTrace()
@@ -40,14 +58,6 @@ class ExpoWallpaperModule : Module() {
       "Hello world! 👋"
     }
 
-    // Enables the module to be used as a native view. Definition components that are accepted as part of
-    // the view definition: Prop, Events.
-    View(ExpoWallpaperView::class) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { view: ExpoWallpaperView, prop: String ->
-        println(prop)
-      }
-    }
   }
 
   val context
