@@ -21,8 +21,7 @@ import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
-// import { setWallpaper, hello } from "../modules/expo-wallpaper";
-import { hello, setWallpaper } from "../modules/expo-wallpaper";
+import { setWallpaper } from "../modules/expo-wallpaper";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -84,23 +83,47 @@ export default function Display() {
   return (
     <GestureHandlerRootView style={styles.flexContainer}>
       <View className="flex-1 justify-center items-center bg-main">
-        <Dialog isVisible={visible} onBackdropPress={toggleAlert}>
-          <Dialog.Title title="Set Wallpaper" />
+        <Dialog
+          style={{ color: "#1c2227" }}
+          isVisible={visible}
+          onBackdropPress={toggleAlert}
+        >
+          <Dialog.Title
+            titleStyle={{ color: "#1c2227", textAlign: "center" }}
+            title="Set Wallpaper"
+          />
           <Dialog.Actions>
             <Dialog.Button
               title="Set Homescreen Wallpaper"
               type="solid"
               containerStyle={{ width: "100%" }}
+              buttonStyle={{
+                backgroundColor: "#ff4655",
+                borderRadius: 50,
+                marginVertical: 2,
+              }}
               onPress={() => onSetWallpaperPress("screen")}
             />
             <Dialog.Button
               title="Set Lockscreen Wallpaper"
+              type="solid"
               containerStyle={{ width: "100%" }}
+              buttonStyle={{
+                backgroundColor: "#ff4655",
+                borderRadius: 50,
+                marginVertical: 2,
+              }}
               onPress={() => onSetWallpaperPress("lock")}
             />
             <Dialog.Button
               title="Set Both"
+              type="solid"
               containerStyle={{ width: "100%" }}
+              buttonStyle={{
+                backgroundColor: "#ff4655",
+                borderRadius: 50,
+                marginVertical: 2,
+              }}
               onPress={() => onSetWallpaperPress("both")}
             />
           </Dialog.Actions>
