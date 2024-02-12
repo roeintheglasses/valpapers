@@ -44,11 +44,20 @@ export default function Display() {
 
   const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
   const { tapGesture, tapOpacity, tapScale } = useTapGesture();
+  const { downloadTapGesture, downloadTapOpacity, downloadTapScale } =
+    useTapGesture();
 
   const animatedSaveStyles = useAnimatedStyle(() => {
     return {
       transform: [{ scale: tapScale.value }],
       opacity: tapOpacity.value,
+    };
+  });
+
+  const animatedDownloadStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: downloadTapScale.value }],
+      opacity: downloadTapOpacity.value,
     };
   });
 
@@ -147,11 +156,11 @@ export default function Display() {
           </Animated.View>
         </GestureDetector>
 
-        <GestureDetector gesture={tapGesture}>
-          <View
-            style={{ flexDirection: "row" }}
-            className="justify-evenly items-center w-full"
-          >
+        <View
+          style={{ flexDirection: "row" }}
+          className="justify-evenly items-center w-full"
+        >
+          <GestureDetector gesture={tapGesture}>
             <Pressable onPress={toggleAlert}>
               <Animated.View
                 className="bg-highlight-prime px-8 py-2 rounded-xl"
@@ -162,18 +171,20 @@ export default function Display() {
                 </Text>
               </Animated.View>
             </Pressable>
+          </GestureDetector>
+          <GestureDetector gesture={downloadTapGesture}>
             <Pressable onPress={onSavePress}>
               <Animated.View
                 className="bg-highlight-prime px-8 py-2 rounded-xl"
-                style={[styles.button, animatedSaveStyles]}
+                style={[styles.button, animatedDownloadStyles]}
               >
                 <Text className="text-white font-poppinsBold text-l">
                   Download
                 </Text>
               </Animated.View>
             </Pressable>
-          </View>
-        </GestureDetector>
+          </GestureDetector>
+        </View>
       </View>
     </GestureHandlerRootView>
   );
