@@ -213,7 +213,7 @@ function PlayerCardItem({ item, index }) {
           uri: `${CDN_URL}/playerCards/${item.uuid}.png`,
         },
       }}
-      asChild
+      asChild={true}
     >
       <TouchableOpacity
         style={{

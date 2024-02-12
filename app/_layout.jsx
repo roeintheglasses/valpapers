@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Tabs, Stack, usePathname } from "expo-router";
@@ -14,6 +14,8 @@ import { QueryClient } from "@tanstack/react-query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
+
+import { fetchWallpapers } from "@hooks/usePlayerCards";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 2 }, cacheTime: 1000 * 60 * 60 * 24 },
@@ -39,16 +41,28 @@ export default function Layout() {
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     Valo: require("../assets/fonts/ValFont.ttf"),
   });
+  const [dataPrefetched, setDataPrefetched] = useState(false);
+
+  useEffect(() => {
+    async function prefetchPlayerCards() {
+      if (dataPrefetched) return;
+      await queryClient.prefetchQuery({
+        queryKey: ["playerCards"],
+        queryFn: fetchWallpapers,
+      });
+      setDataPrefetched(true);
+    }
+    prefetchPlayerCards();
+  });
 
   useEffect(() => {
     async function handleSplashScreen() {
-      if (fontsLoaded) {
+      if (fontsLoaded && dataPrefetched) {
         await SplashScreen.hideAsync();
       }
     }
-
     handleSplashScreen();
-  }, [fontsLoaded]);
+  }, [fontsLoaded, dataPrefetched]);
 
   if (!fontsLoaded) {
     return null; // Consider showing a loading indicator or a splash screen here
@@ -59,14 +73,11 @@ export default function Layout() {
       client={queryClient}
       persistOptions={{ persister: asyncStoragePersister }}
     >
-      <StatusBar backgroundColor="#1b2228" />
       <GestureHandlerRootView style={{ flex: 1 }}>
+        <StatusBar backgroundColor="#1b2228" />
         <SafeAreaView style={{ flex: 1 }}>
           <Header />
-          {/* <Stack
-          initialRouteName="index"
-          screenOptions={{ headerShown: false }}
-        /> */}
+          {/* <Stack initialRouteName="index" /> */}
           <Tabs
             initialRouteName="index"
             screenOptions={{ headerShown: false }}
@@ -103,11 +114,8 @@ export default function Layout() {
             <Tabs.Screen
               name="display"
               options={{
-                href: "/display",
+                href: null,
                 tabBarLabel: "Display",
-                tabBarStyle: {
-                  display: "none",
-                },
               }}
             />
           </Tabs>

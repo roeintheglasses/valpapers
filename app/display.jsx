@@ -81,12 +81,12 @@ export default function Display() {
   const onSetWallpaperPress = async (type) => {
     let fileUri = FileSystem.documentDirectory + fileName;
     try {
+      toggleAlert();
       const res = await FileSystem.downloadAsync(imageUri, fileUri);
       const options = { uri: res.uri, type };
       const result = setWallpaper(options);
       console.log(result);
       showToast("Wallpaper Updated!");
-      router.replace("/");
     } catch (err) {
       console.log("FS Err: ", err);
     }

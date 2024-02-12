@@ -7,7 +7,7 @@ import { VALORANT_WALLPAPER_API_ENDPOINT } from "@data/constants.json";
  * 2. The endpoint returns a JSON object, which is destructured into the data variable.
  * 3. The data variable is returned, which is an array of wallpaper objects.
  */
-async function fetchWallpapers() {
+export async function fetchWallpapers() {
   try {
     const { data } = await axios.get(VALORANT_WALLPAPER_API_ENDPOINT);
     if (!data || !data.data) {
