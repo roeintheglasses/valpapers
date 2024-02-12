@@ -59,9 +59,9 @@ export default function Layout() {
       client={queryClient}
       persistOptions={{ persister: asyncStoragePersister }}
     >
+      <StatusBar backgroundColor="#1b2228" />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar backgroundColor="#1b2228" />
           <Header />
           {/* <Stack
           initialRouteName="index"
