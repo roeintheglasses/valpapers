@@ -12,16 +12,13 @@ import {
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import { Dialog } from "@rneui/themed";
-import {
-  GestureHandlerRootView,
-  GestureDetector,
-} from "react-native-gesture-handler";
+import { GestureDetector } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 
 import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
-import { setWallpaper } from "../modules/expo-wallpaper";
+import { setWallpaper, hello } from "../modules/expo-wallpaper";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -93,103 +90,105 @@ export default function Display() {
   };
 
   return (
-    <GestureHandlerRootView style={styles.flexContainer}>
-      <View className="flex-1 justify-center items-center bg-main">
-        <Dialog
-          style={{ color: "#1c2227" }}
-          isVisible={visible}
-          onBackdropPress={toggleAlert}
-        >
-          <Dialog.Title
-            titleStyle={{ color: "#1c2227", textAlign: "center" }}
-            title="Set Wallpaper"
+    <View className="flex-1 justify-center items-center bg-main">
+      <Dialog
+        style={{ color: "#1c2227" }}
+        isVisible={visible}
+        onBackdropPress={toggleAlert}
+      >
+        <Dialog.Title
+          titleStyle={{ color: "#1c2227", textAlign: "center" }}
+          title="Set Wallpaper"
+        />
+        <Dialog.Actions>
+          <Dialog.Button
+            title="Set Homescreen Wallpaper"
+            type="solid"
+            containerStyle={{ width: "100%" }}
+            buttonStyle={{
+              backgroundColor: "#ff4655",
+              borderRadius: 50,
+              marginVertical: 2,
+            }}
+            onPress={() => onSetWallpaperPress("screen")}
           />
-          <Dialog.Actions>
-            <Dialog.Button
-              title="Set Homescreen Wallpaper"
-              type="solid"
-              containerStyle={{ width: "100%" }}
-              buttonStyle={{
-                backgroundColor: "#ff4655",
-                borderRadius: 50,
-                marginVertical: 2,
-              }}
-              onPress={() => onSetWallpaperPress("screen")}
-            />
-            <Dialog.Button
-              title="Set Lockscreen Wallpaper"
-              type="solid"
-              containerStyle={{ width: "100%" }}
-              buttonStyle={{
-                backgroundColor: "#ff4655",
-                borderRadius: 50,
-                marginVertical: 2,
-              }}
-              onPress={() => onSetWallpaperPress("lock")}
-            />
-            <Dialog.Button
-              title="Set Both"
-              type="solid"
-              containerStyle={{ width: "100%" }}
-              buttonStyle={{
-                backgroundColor: "#ff4655",
-                borderRadius: 50,
-                marginVertical: 2,
-              }}
-              onPress={() => onSetWallpaperPress("both")}
-            />
-          </Dialog.Actions>
-        </Dialog>
+          <Dialog.Button
+            title="Set Lockscreen Wallpaper"
+            type="solid"
+            containerStyle={{ width: "100%" }}
+            buttonStyle={{
+              backgroundColor: "#ff4655",
+              borderRadius: 50,
+              marginVertical: 2,
+            }}
+            onPress={() => onSetWallpaperPress("lock")}
+          />
+          <Dialog.Button
+            title="Set Both"
+            type="solid"
+            containerStyle={{ width: "100%" }}
+            buttonStyle={{
+              backgroundColor: "#ff4655",
+              borderRadius: 50,
+              marginVertical: 2,
+            }}
+            onPress={() => onSetWallpaperPress("both")}
+          />
+        </Dialog.Actions>
+      </Dialog>
 
-        <GestureDetector gesture={pinchGesture}>
-          <Animated.View
-            style={[
-              animatedStyle,
-              styles.container,
-              { height: wallpaperHeightBasedOnTypeType },
-            ]}
-          >
-            <Image
-              source={{ uri: imageUri }}
-              style={styles.image}
-              placeholder={wallpaperBlurHash}
-              contentFit="contain"
-              recyclingKey={`display-image-${imageUri}`}
-            />
-          </Animated.View>
-        </GestureDetector>
-
-        <View
-          style={{ flexDirection: "row" }}
-          className="justify-evenly items-center w-full"
+      <GestureDetector gesture={pinchGesture}>
+        <Animated.View
+          style={[
+            animatedStyle,
+            styles.container,
+            { height: wallpaperHeightBasedOnTypeType },
+          ]}
         >
-          <GestureDetector gesture={tapGesture}>
-            <Pressable onPress={toggleAlert}>
-              <Animated.View
-                className="bg-highlight-prime px-8 py-2 rounded-xl"
-                style={[styles.button, animatedSaveStyles]}
-              >
-                <Text className="text-white font-poppinsBold text-l">
-                  Set Wallpaper
-                </Text>
-              </Animated.View>
-            </Pressable>
-          </GestureDetector>
-          <GestureDetector gesture={downloadTapGesture}>
-            <Pressable onPress={onSavePress}>
-              <Animated.View
-                className="bg-highlight-prime px-8 py-2 rounded-xl"
-                style={[styles.button, animatedDownloadStyles]}
-              >
-                <Text className="text-white font-poppinsBold text-l">
-                  Download
-                </Text>
-              </Animated.View>
-            </Pressable>
-          </GestureDetector>
-        </View>
+          <Image
+            source={{ uri: imageUri }}
+            style={styles.image}
+            placeholder={wallpaperBlurHash}
+            contentFit="contain"
+            recyclingKey={`display-image-${imageUri}`}
+          />
+        </Animated.View>
+      </GestureDetector>
+
+      <View
+        style={{ flexDirection: "row" }}
+        className="justify-evenly items-center w-full"
+      >
+        <GestureDetector gesture={tapGesture}>
+          <Pressable
+            onPress={() => {
+              onSetWallpaperPress("screen");
+            }}
+          >
+            <Animated.View
+              className="bg-highlight-prime px-8 py-2 rounded-xl"
+              style={[styles.button, animatedSaveStyles]}
+            >
+              <Text className="text-white font-poppinsBold text-l">
+                Set Wallpaper
+              </Text>
+            </Animated.View>
+          </Pressable>
+        </GestureDetector>
+        <GestureDetector gesture={downloadTapGesture}>
+          <Pressable onPress={onSavePress}>
+            <Animated.View
+              className="bg-highlight-prime px-8 py-2 rounded-xl"
+              style={[styles.button, animatedDownloadStyles]}
+            >
+              <Text className="text-white font-poppinsBold text-l">
+                Download
+              </Text>
+            </Animated.View>
+          </Pressable>
+        </GestureDetector>
       </View>
-    </GestureHandlerRootView>
+    </View>
   );
 }
 

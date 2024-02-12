@@ -6,6 +6,16 @@ import {
   ReduceMotion,
 } from "react-native-reanimated";
 
+/**
+ * Hook that handles pinch gesture and returns values for scale,
+ * focal point, and gesture handler.
+ *
+ * Sets up a Gesture.Pinch gesture handler and returns values for
+ * scale, focalX, focalY which are updated on gesture events.
+ * Also returns the pinchGesture handler.
+ *
+ * Smoothly animates scale back to 1 on gesture end.
+ */
 export function usePinchGesture() {
   const scale = useSharedValue(1);
   const focalX = useSharedValue(0);
@@ -25,6 +35,14 @@ export function usePinchGesture() {
   return { focalX, focalY, scale, pinchGesture };
 }
 
+/**
+ * Hook that handles tap gesture and returns values for scale,
+ * opacity, and gesture handler.
+ *
+ * Sets up a Gesture.Tap gesture handler and returns values for
+ * tapScale, tapOpacity which are animated on tap events.
+ * Also returns the tapGesture handler.
+ */
 export function useTapGesture() {
   const tapScale = useSharedValue(1);
   const tapOpacity = useSharedValue(1);
