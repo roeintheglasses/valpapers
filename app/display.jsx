@@ -44,8 +44,11 @@ export default function Display() {
 
   const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
   const { tapGesture, tapOpacity, tapScale } = useTapGesture();
-  const { downloadTapGesture, downloadTapOpacity, downloadTapScale } =
-    useTapGesture();
+  const {
+    tapGesture: downloadTapGesture,
+    tapOpacity: downloadTapOpacity,
+    tapScale: downloadTapScale,
+  } = useTapGesture();
 
   const animatedSaveStyles = useAnimatedStyle(() => {
     return {

@@ -1,5 +1,10 @@
 import { Gesture } from "react-native-gesture-handler";
-import { useSharedValue, withTiming } from "react-native-reanimated";
+import {
+  useSharedValue,
+  withTiming,
+  Easing,
+  ReduceMotion,
+} from "react-native-reanimated";
 
 export function usePinchGesture() {
   const scale = useSharedValue(1);
@@ -26,12 +31,28 @@ export function useTapGesture() {
 
   const tapGesture = Gesture.Tap()
     .onBegin(() => {
-      tapScale.value = withTiming(0.9);
-      tapOpacity.value = withTiming(0.5);
+      tapScale.value = withTiming(0.9, {
+        duration: 400,
+        easing: Easing.elastic(2),
+        reduceMotion: ReduceMotion.Never,
+      });
+      tapOpacity.value = withTiming(0.8, {
+        duration: 400,
+        easing: Easing.elastic(2),
+        reduceMotion: ReduceMotion.Never,
+      });
     })
     .onEnd(() => {
-      tapScale.value = withTiming(1);
-      tapOpacity.value = withTiming(1);
+      tapScale.value = withTiming(1, {
+        duration: 400,
+        easing: Easing.elastic(2),
+        reduceMotion: ReduceMotion.Never,
+      });
+      tapOpacity.value = withTiming(1, {
+        duration: 400,
+        easing: Easing.elastic(2),
+        reduceMotion: ReduceMotion.Never,
+      });
     });
   return { tapScale, tapOpacity, tapGesture };
 }
