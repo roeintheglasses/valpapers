@@ -10,7 +10,7 @@ import {
   ToastAndroid,
 } from "react-native";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Dialog } from "@rneui/themed";
 import { GestureDetector } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
@@ -31,6 +31,8 @@ export default function Display() {
   const wallpaperBlurHash = getRandomBlurHash();
 
   const local = useLocalSearchParams();
+  const router = useRouter();
+
   const { uri: imageUri, item } = local;
   const itemData = JSON.parse(item);
 
@@ -83,6 +85,8 @@ export default function Display() {
       const options = { uri: res.uri, type };
       const result = setWallpaper(options);
       console.log(result);
+      showToast("Wallpaper Updated!");
+      router.replace("/");
     } catch (err) {
       console.log("FS Err: ", err);
     }
@@ -160,11 +164,7 @@ export default function Display() {
         className="justify-evenly items-center w-full"
       >
         <GestureDetector gesture={tapGesture}>
-          <Pressable
-            onPress={() => {
-              onSetWallpaperPress("screen");
-            }}
-          >
+          <Pressable onPress={toggleAlert}>
             <Animated.View
               className="bg-highlight-prime px-8 py-2 rounded-xl"
               style={[styles.button, animatedSaveStyles]}
@@ -213,6 +213,7 @@ async function SaveFileToGallery(fileUri) {
       } else {
         await MediaLibrary.addAssetsToAlbumAsync([asset], album, true);
       }
+      showToast("Wallpaper Saved!");
     } catch (err) {
       console.log("Save err: ", err);
     }
@@ -221,8 +222,8 @@ async function SaveFileToGallery(fileUri) {
   }
 }
 
-function showToast() {
-  ToastAndroid.show("Wallpaper Updated", ToastAndroid.SHORT);
+function showToast(message) {
+  ToastAndroid.show(message, ToastAndroid.SHORT);
 }
 
 const styles = StyleSheet.create({
