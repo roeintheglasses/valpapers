@@ -1,0 +1,3 @@
+[submodule "modules/expo-wallpaper"]
+	path = modules/expo-wallpaper
+	url = git@github.com:roeintheglasses/expo-wallpaper.git
