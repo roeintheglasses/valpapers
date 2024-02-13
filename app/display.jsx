@@ -10,15 +10,16 @@ import {
   ToastAndroid,
 } from "react-native";
 import { Image } from "expo-image";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { Dialog } from "@rneui/themed";
+import { Link, useLocalSearchParams } from "expo-router";
 import { GestureDetector } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 
+import MCI from "@expo/vector-icons/MaterialCommunityIcons";
+import { Dialog } from "@rneui/themed";
 import { usePinchGesture, useTapGesture } from "@hooks/useGesture";
 import getRandomBlurHash from "@lib/getRandomBlurHash";
 
-import { setWallpaper, hello } from "../modules/expo-wallpaper";
+import { setWallpaper } from "../modules/expo-wallpaper";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
@@ -31,7 +32,6 @@ export default function Display() {
   const wallpaperBlurHash = getRandomBlurHash();
 
   const local = useLocalSearchParams();
-  const router = useRouter();
 
   const { uri: imageUri, item } = local;
   const itemData = JSON.parse(item);
@@ -95,6 +95,17 @@ export default function Display() {
 
   return (
     <View className="flex-1 justify-center items-center bg-main">
+      <View style={styles.goBackView}>
+        <MCI
+          name="arrow-left"
+          size={18}
+          color="#fff"
+          style={{ paddingTop: 2 }}
+        />
+        <Link href={"/"} className="text-white font-poppinsBold text-xl">
+          Home
+        </Link>
+      </View>
       <Dialog
         style={{ color: "#1c2227" }}
         isVisible={visible}
@@ -241,9 +252,18 @@ const styles = StyleSheet.create({
     width: screenWidth,
   },
   button: {
-    padding: 10,
-    elevation: 1,
-    alignItems: "center", // Add this to center the text horizontally
+    paddingHorizontal: 40,
+    alignItems: "center",
     justifyContent: "center",
+  },
+  goBackView: {
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    flexDirection: "row",
+    width: 108,
+    alignSelf: "flex-start",
+    marginTop: -40,
+    marginBottom: 20,
+    paddingHorizontal: 20,
   },
 });
