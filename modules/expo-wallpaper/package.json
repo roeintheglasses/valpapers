@@ -5,5 +5,9 @@
   "main": "index.ts",
   "repository": "https://github.com/roeintheglasses/expo-wallpaper",
   "author": "roeintheglasses",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "expo": "^50.0.6",
+    "expo-modules-core": "^1.11.8"
+  }
 }
