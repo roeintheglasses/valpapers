@@ -39,7 +39,7 @@ export default function Display() {
   const fileName =
     itemData && itemData.uuid ? `${itemData.uuid}.png` : itemData.id;
   const wallpaperHeightBasedOnTypeType =
-    itemData && itemData.uuid ? "80%" : "50%";
+    itemData && itemData.uuid ? "80%" : "80%";
 
   const { scale, focalX, focalY, pinchGesture } = usePinchGesture();
   const { tapGesture, tapOpacity, tapScale } = useTapGesture();
@@ -94,7 +94,7 @@ export default function Display() {
   };
 
   return (
-    <View className="flex-1 justify-center items-center bg-main">
+    <View className="flex-1 justify-evenly items-center bg-main">
       <View style={styles.goBackView}>
         <MCI
           name="arrow-left"
@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: 108,
     alignSelf: "flex-start",
-    marginTop: -40,
     marginBottom: 20,
+    marginTop: 10,
     paddingHorizontal: 20,
   },
 });

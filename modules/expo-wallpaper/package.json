@@ -1,0 +1,9 @@
+{
+  "name": "expo-wallpaper",
+  "version": "1.0.0",
+  "description": "Native Android Wallpaper Manager custom module for Expo & React Native",
+  "main": "index.ts",
+  "repository": "https://github.com/roeintheglasses/expo-wallpaper",
+  "author": "roeintheglasses",
+  "license": "MIT"
+}
