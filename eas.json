@@ -15,7 +15,12 @@
         "buildType": "apk"
       }
     },
-    "production": {}
+    "production": {
+      "android": {
+        "credentialsSource": "local",
+        "autoIncrement": true
+      }
+    }
   },
   "submit": {
     "production": {}

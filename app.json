@@ -12,14 +12,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#cc3f3f"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_foreground.png",
         "backgroundImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_background.png",
         "monochromeImage": "./assets/icons/android/res/mipmap-xhdpi/ic_launcher_monochrome.png"
       },
-      "package": "com.roeintheglasses.valpapers"
+      "package": "com.valpapers",
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/icons/web/favicon.ico"
